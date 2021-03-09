@@ -1,0 +1,52 @@
+body {
+    background-image: url(resources/dark.jpg);
+}
+
+img {
+    height: 120px;
+}
+
+.aligncenter{
+    text-align: center;
+
+}
+
+.img-light:hover{
+    opacity: .5;
+}
+
+.main_text {
+    font-size: 70px;
+    position:static;
+    text-align: center; 
+    color: rgb(201, 197, 224);
+    font-family: 'Helvetica Neue', sans-serif;
+    font-weight: bold;
+    letter-spacing: -1px;
+    line-height: 1;
+    text-shadow: 0 0 10px black;
+}
+
+.table_caption {
+    font-size: 40px;
+    color: rgb(200, 9, 56);
+    font-family: 'Helvetica Neue', sans-serif;
+    font-weight: bold;
+    letter-spacing: -1px;
+    line-height: 1;
+    text-shadow: 0 0 10px black;
+}
+
+
+.bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0px;
+    margin-left: 0px;
+    margin-bottom: 0px;
+}
+
+
+
+
+
