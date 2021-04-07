@@ -1,6 +1,6 @@
 import numpy as np
 from sympy import symbols, diff, exp, core
-from staff_matrix import get_jacobi, roots_to_dict, check_norm
+from staff_matrix import get_jacobi, roots_to_dict
 
 
 def newton_solve(system_equations: np.array, approx, tol=0.0001):

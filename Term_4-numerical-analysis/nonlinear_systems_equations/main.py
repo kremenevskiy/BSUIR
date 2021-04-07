@@ -24,7 +24,7 @@ approx = task.approx
 
 
 print(f"\t\tНачальное приближение: {approx}")
-iteration_ans = iteration_solve(system, approx)
+iteration_ans = iteration_solve(system, approx, verbose=1)
 print("\t\t*** Метод простой итерации: ***")
 print(f"Корни уравнения: {print_list(iteration_ans[0])}")
 print(f"Количество итераций: {iteration_ans[1]}")

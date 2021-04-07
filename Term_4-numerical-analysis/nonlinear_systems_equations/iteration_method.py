@@ -1,10 +1,26 @@
 from sympy import symbols, solve, exp, log, E
 import numpy as np
 from scipy.optimize import fsolve
-from staff_matrix import get_jacobi, roots_to_dict, check_norm
+from staff_matrix import get_jacobi, roots_to_dict
+import random
 
 
-def iteration_solve(system_equations: np.array, approx, tol=0.0001):
+def get_q(fi_equation, approx, e=0.1):
+    x_0 = approx[0]
+    x_fi = approx[1]
+    x = symbols('x:2')
+    e = 0.1
+    x_1 = random.uniform(x_0 - e, x_0 + e)
+    x_2 = random.uniform(x_0 - e, x_0 + e)
+
+    q = (abs(fi_equation.subs({x[0]: x_1, x[1]: x_fi}) - fi_equation.subs({x[0]: x_2, x[1]: x_fi}))) / (abs(x_1 - x_2))
+    return q
+
+
+def iteration_solve(system_equations: np.array, approx, tol=0.0001, verbose=0):
+    if verbose == 1:
+        print('\niteration method computing...')
+
     n = system_equations.shape[0]
     x = symbols(f'x:{n}')
 
@@ -17,13 +33,18 @@ def iteration_solve(system_equations: np.array, approx, tol=0.0001):
     error = tol * 10000
 
     J = get_jacobi(system_equations[0])
-    jacabi_values = np.zeros(shape=(n, n))
+    jacobi_values = np.zeros(shape=(n, n))
 
     roots_d = roots_to_dict(curr_roots, x)
 
     for i in range(n):
         for j in range(n):
-            jacabi_values[i, j] = J[i, j].subs(roots_d)
+            jacobi_values[i, j] = J[i, j].subs(roots_d)
+
+    # compute q
+    if verbose == 1:
+        print(f'q_1 = {float(get_q(fi_equations[0], (approx[0], approx[1]), 0.1))}')
+        print(f'q_2 = {float(get_q(fi_equations[1], (approx[1], approx[0]), 0.1))}')
 
     iteration = 0
     while error > tol:
@@ -40,6 +61,9 @@ def iteration_solve(system_equations: np.array, approx, tol=0.0001):
 
         error = np.amax(errors)
         iteration += 1
+
+    if verbose == 1:
+        print('stopped iteration method\n')
 
     return curr_roots, iteration
 
