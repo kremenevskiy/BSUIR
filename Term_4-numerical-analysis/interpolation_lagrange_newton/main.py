@@ -4,6 +4,7 @@ from newton_interpolation import y_diff_table, get_a, newton_poly
 import tests
 import task
 from sympy import symbols
+from min_squares import min_square
 
 x = tests.x_1
 y = tests.y_1
@@ -29,3 +30,11 @@ print('-' * 80)
 print(f'\tNewton interpolation polynomial:\nN(x) = {newton}')
 print(f'Interpolation point: x = {point}')
 print(f'Newton poly result on x = {point}\nN({point}) = {float(newton.subs(x_var, point)):.4f}')
+
+
+x = np.array([0, 1, 2, 4, 5])
+y = np.array([2.1, 2.4, 2.6, 2.8, 3])
+
+print(f'Polynomial of best approximation:')
+x = symbols(f'x:{x.shape[0]-1}')
+
