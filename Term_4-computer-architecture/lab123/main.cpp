@@ -10,8 +10,8 @@ void handleInput();
 
 int main() {
 
-    Register a(10);
-    Register b(-4);
+    Register a(-32768);
+    Register b(-1);
 
     Register res;
     res = a / b;
@@ -54,5 +54,3 @@ void handleInput(){
         << " = " << int(result) <<'\n';
 
 }
-
-

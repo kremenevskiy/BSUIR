@@ -237,6 +237,11 @@ Register Register::operator-(const Register& reg_2){
     }
 
     Register reg_2_temp(reg_2);
+    if (reg_2 == -32678){
+        std::cout << "Невозможно выполнить отрицание для " << int(reg_2) << '\n';
+        return Register(0);
+    }
+
     reg_2_temp.reverseBits();
     if (show_sub){
         std::cout << "Инвертирование 2 числа:\n";
@@ -344,6 +349,18 @@ Register Register::operator*(Register& reg_2){
 
 
 Register Register::operator/(Register& reg_2) {
+
+    if (reg_2 == 0){
+        std::cout << "Ошибка при делении! Не предусмотрено деление на 0!";
+        return Register(0);
+    }
+
+    if (*this == -32768 && reg_2 == -1) {
+        std::cout << "Переполнение при делении!";
+        return Register(0);
+    }
+
+
     Register A;
     if (this->binary[0] == 1){
         A.setNumber(-1);
