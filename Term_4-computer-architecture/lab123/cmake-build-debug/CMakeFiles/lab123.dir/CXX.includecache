@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/kremenevskiy/Desktop/labs/Term_4-computer-architecture/lab123/Register.cpp
+Register.h
+/Users/kremenevskiy/Desktop/labs/Term_4-computer-architecture/lab123/Register.h
+
+/Users/kremenevskiy/Desktop/labs/Term_4-computer-architecture/lab123/Register.h
+iostream
+-
+vector
+-
+iomanip
+-
+
+/Users/kremenevskiy/Desktop/labs/Term_4-computer-architecture/lab123/main.cpp
+iostream
+-
+cmath
+-
+utility
+-
+vector
+-
+Register.h
+/Users/kremenevskiy/Desktop/labs/Term_4-computer-architecture/lab123/Register.h
+
