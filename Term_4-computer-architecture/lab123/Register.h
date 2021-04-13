@@ -8,9 +8,10 @@
 #include <iostream>
 #include <vector>
 #include <iomanip>
+
 #define show_add false
 #define show_sub false
-#define show_mul true
+#define show_mul false
 #define show_div true
 
 
@@ -47,7 +48,6 @@ public:
 
     static Register reverseBits(const Register &reg);
     void reverseBits();
-
     static int getBigNum(const Register& reg_1, const Register& reg_2);
 
     Register& operator=(const Register& reg);
@@ -69,7 +69,11 @@ public:
     Register operator-(int& num);
     friend Register operator-(int& num, Register& reg_2);
 
-    Register operator*(Register& reg2);
+    Register operator*(Register& reg_2);
+    Register operator/(Register& reg_2);
+
+    friend bool operator==(const Register& reg_1, const Register& reg_2);
+    friend bool operator==(const Register& reg_1, const int& num);
 
     Register operator<<(const Register& reg2) const;
     Register operator<<(int num) const;

@@ -5,6 +5,7 @@
 #include "Register.h"
 
 
+
 void Register::setBinary(const std::vector<int> &binArr) {
     binary = binArr;
     number = (int)(*this);
@@ -341,6 +342,124 @@ Register Register::operator*(Register& reg_2){
     return A;
 }
 
+
+Register Register::operator/(Register& reg_2) {
+    Register A;
+    if (this->binary[0] == 1){
+        A.setNumber(-1);
+    }
+    Register M(reg_2);
+    Register reg_1(*this);
+
+    if (show_div) {
+        std::cout << "---Деление---\n";
+        std::cout << this->number << " / " << reg_2.number
+                  << " (Результат компьютера: " << (int) (*this) / (int) reg_2
+                  << " | Остакток: " << (int) (*this) % (int) reg_2 << ") " << '\n';
+        std::cout << "Первое число: " << int(*this) << " (" << this->binary << ") - reg_1\n";
+        std::cout << "Второе число: " << int(reg_2) << " (" << reg_2.binary << ") - reg_2\n\n";
+
+        std::cout << std::setw(10) << " A " << std::setw(9) << "|";
+        std::cout << std::setw(14) << " reg_1"<< std::setw(7) << "|\n";
+        std::cout << A.binary << " |";
+        std::cout << std::setw(2) << reg_1.binary << " |\n";
+    }
+
+
+    int Qn{};
+    for (int i = N - 1; i >= 0; --i) {
+        Qn = reg_1[0];
+        A = A << 1;
+        reg_1 = reg_1 << 1;
+        A[N - 1] = Qn;
+
+        if (show_div) {
+            std::cout << A.binary << " |";
+            std::cout << std::setw(2) << reg_1.binary << " | ";
+            std::cout << "<< shift | STEP " << N-i <<"\n";
+        }
+
+        int A_sign = A[0];
+
+        if (M[0] == A[0]) {
+            A = A - M;
+            if (show_div) {
+                std::cout << A.binary << " |";
+                std::cout << std::setw(2) << reg_1.binary << " | ";
+                std::cout << "Sub: A = A - reg_2\n";
+            }
+        } else {
+            A = A + M;
+            if (show_div) {
+                std::cout << A.binary << " |";
+                std::cout << std::setw(2) << reg_1.binary << " | ";
+                std::cout << "Add: A = A + reg_2\n";
+            }
+        }
+
+        if (A_sign == A[0] || (A == 0 && reg_1 == 0)) {
+            reg_1.setIndexedVal(N - 1, 1);
+            if (show_div) {
+                std::cout << A.binary << " |";
+                std::cout << std::setw(2) << reg_1.binary << " | ";
+                std::cout << "reg_1[N] = 1\n";
+            }
+        } else {
+            if (M[0] == A_sign) {
+                A = A + M;
+            }
+            else{
+                A = A - M;
+            }
+            reg_1.setIndexedVal(N - 1, 0);
+            if (show_div) {
+                std::cout << A.binary << " |";
+                std::cout << std::setw(2) << reg_1.binary << " | ";
+                std::cout << "Restore A\n";
+            }
+        }
+
+        if (show_div){
+            for(int i = 0; i < 60; i++)
+                std::cout << '.';
+            std::cout << '\n';
+        }
+    }
+
+    if ((*this)[0] != M[0]) {
+        Register saved_reg_1(reg_1);
+        reg_1.reverseBits();
+
+        if (show_div) {
+            std::cout << "\nТак как знак Делимого(" << (int)*this << ") не равен знаку Делителя ("
+            << (int)M << ")" << "\nИнвертируем значение полученного регистра reg_1\n";
+            std::cout << "~ " << saved_reg_1.binary << " = " << reg_1.binary << '\n';
+
+        }
+    }
+
+    if (show_div){
+        std::cout << '\n' << std::setw(16) <<  "Осаток(Регистр A)";
+        std::cout << std::setw(2) << " | ";
+        std::cout << std::setw(24) << "Частное(Регситр reg_2)\n";
+        std::cout << A.binary << " | " << reg_1.binary << '\n';
+        std::cout << "\nРезультат деления: " << (int)reg_1 << " (" << reg_1.binary << ")";
+        std::cout << "\nОстаток деления: " << (int)A << " (" << reg_1.binary << ")\n";
+        std::cout << (int)(*this) << " = " << (int)reg_1 << " * " << (int)M << " + " << int(A) << "\n\n";
+    }
+
+    return reg_1;
+}
+
+
+bool operator==(const Register& reg_1, const Register& reg_2){
+    return reg_1.binary == reg_2.binary;
+}
+
+bool operator==(const Register& reg_1, const int& num){
+    return (int)reg_1 == num;
+}
+
 Register Register::operator<<(const Register& reg2) const{
     Register shifted;
     shifted.setNumber((int)(*this) << reg2.number);
@@ -392,6 +511,7 @@ std::ostream& operator<< (std::ostream &out, const Register& reg) {
     out << '\n';
     return out;
 }
+
 
 std::ostream& operator<< (std::ostream &out, const std::vector<int>& bitsArr) {
     for(int i = 0; i < bitsArr.size(); ++i){

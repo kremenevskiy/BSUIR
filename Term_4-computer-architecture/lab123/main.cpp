@@ -5,24 +5,54 @@
 #include "Register.h"
 
 
-
+void handleInput();
 
 
 int main() {
-//    std::vector<int> bin_1{0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
-//    std::vector<int> bin_2{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-//    Register reg_1(-5);
-//    Register reg_2(2);
-//
-//    Register result = reg_1 - reg_2;
 
-    Register a(276);
-    Register b(-689);
-    Register c = a * b;
+    Register a(10);
+    Register b(-4);
 
+    Register res;
+    res = a / b;
+
+//    handleInput();
 
     return 0;
 }
 
 
-// переполнение при сложении
+void handleInput(){
+    std::cout << "---Эмулятор АЛУ---\n";
+    std::cout << "Выполнение заданной операции\n";
+    std::cout << "Вводите исходные данные:\n";
+
+    Register a;
+    Register b;
+    Register result;
+
+    std::cout << "a = ";
+    std::cin >> a;
+    std::cout << "b = ";
+    std::cin >> b;
+
+    std::cout << "Операция ( + | - | * | / ) : ";
+    char sign;
+    std::cin >> sign;
+
+    std::cout << "Выполнеие: " << (int)a << " " << sign << " " << (int)b << '\n';
+    if (sign == '+')
+        result = a + b;
+    else if (sign == '-')
+        result = a - b;
+    else if (sign == '*')
+        result = a * b;
+    else if (sign == '/')
+        result = a / b;
+
+    std::cout << "\nРезультат: " << (int)a << " " << sign << " " << (int)b
+        << " = " << int(result) <<'\n';
+
+}
+
+
