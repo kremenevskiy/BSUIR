@@ -124,12 +124,19 @@ Register& Register::operator=(const Register& reg){
 
 
 int& Register::operator[](const int index){
+
     return this->binary[index];
 }
 
 
 const int& Register::operator[](const int index) const {
     return this->binary[index];
+}
+
+
+void Register::setIndexedVal(int index, int value){
+    (*this)[index] = value;
+    this->setBinary(this->binary);
 }
 
 
@@ -158,10 +165,10 @@ Register Register::operator+(const Register &reg_2){
     int r{};
     int r_prev{};
     Register result;
-    if (show){
+    if (show_add){
         std::cout << "---Сложение---\n";
         std::cout << "Первое число: " << int(*this) << " (" << this->binary << ")"<< '\n';
-        std::cout << "Второе число: " << int(reg_2) << " (" << this->binary << ")"<< '\n';
+        std::cout << "Второе число: " << int(reg_2) << " (" << reg_2.binary << ")"<< '\n';
 
 
         std::cout << std::setw(5);
@@ -185,7 +192,7 @@ Register Register::operator+(const Register &reg_2){
             r = 0;
             result[i] = this->binary[i] + reg_2[i];
         }
-        if (show){
+        if (show_add){
             std::cout << std::setw(4) << binary[i];
             std::cout << std::setw(8) << reg_2[i];
             std::cout << std::setw(6) << r_prev;
@@ -198,11 +205,11 @@ Register Register::operator+(const Register &reg_2){
         std::cout << "Переполнение\n";
     }
 
-    if(show){
+    if(show_add){
         std::cout << (int)*this << " + " << (int)reg_2 << " = " << (int)result << '\n';
         std::cout << "Результат: " << (int)result << " (" << result.binary << ")\n";
     }
-
+    result.setBinary(result.binary);
     return result;
 }
 
@@ -221,16 +228,16 @@ Register operator+(int& num, Register& reg_2){
 
 
 Register Register::operator-(const Register& reg_2){
-    if (show){
+    if (show_sub){
         std::cout << "---Вычитание---\n";
         std::cout << (int)*this << " - " << (int)reg_2 << '\n';
         std::cout << "Первое число: " << int(*this) << " (" << this->binary << ")"<< '\n';
-        std::cout << "Второе число: " << int(reg_2) << " (" << this->binary << ")"<< '\n';
+        std::cout << "Второе число: " << int(reg_2) << " (" << reg_2.binary << ")"<< '\n';
     }
 
     Register reg_2_temp(reg_2);
     reg_2_temp.reverseBits();
-    if (show){
+    if (show_sub){
         std::cout << "Инвертирование 2 числа:\n";
         std::cout << "~ " << reg_2.binary << " = " << reg_2_temp.binary << " (" << (int)reg_2_temp << ")\n";
     }
@@ -250,6 +257,115 @@ Register operator-(int& num, Register& reg_2){
     Register reg_1(num);
     Register result = reg_1 - reg_2;
     return result;
+}
+
+
+int Register::getBigNum(const Register& reg_1, const Register& reg_2){
+    int num = 0;
+    int j = 0;
+    for(int i = 0; i < N; ++i){
+        num += reg_2[N-i-1] * (int)pow(2, j);
+        ++j;
+    }
+    for(int i = 0; i < N; ++i){
+        num += reg_1[N-i-1] * (int)pow(2, j);
+        ++j;
+    }
+    return num;
+}
+
+
+Register Register::operator*(Register& reg_2){
+    if (show_mul){
+        std::cout << "---Умножение---\n";
+        std::cout << this->number << " * " << reg_2.number << " (Результат компьютера: " << (int)(*this) * (int)reg_2 << ") "<<'\n';
+        std::cout << "Первое число: " << int(*this) << " (" << this->binary << ") - reg_1\n";
+        std::cout << "Второе число: " << int(reg_2) << " (" << reg_2.binary << ") - reg_2\n\n";
+    }
+
+    Register A;
+    int Q1 = 0;
+    int A1 = 0;
+
+    if (show_mul) {
+        std::cout << std::setw(10) << " A " << std::setw(9) << "|";
+        std::cout << std::setw(14) << " reg_2 " << std::setw(6) <<  "|" << " Q1  |\n";
+
+        std::cout << A.binary << " |";
+        std::cout << std::setw(2) << reg_2.binary << " | ";
+        std::cout << std::setw(2) << Q1 << "  |\n";
+    }
+
+    for(int i = N-1; i >= 0; --i) {
+
+        if (Q1 == 0 && reg_2[N-1] == 1){
+            A = A - *this;
+        }
+        else if (Q1 == 1 && reg_2[N-1] == 0){
+            A = A + *this;
+        }
+
+        if (show_mul && Q1 != reg_2[N-1]) {
+            std::cout << A.binary << " |";
+            std::cout << std::setw(2) << reg_2.binary << " | ";
+            std::cout << std::setw(2) << Q1 << "  |  ";
+            std::cout << reg_2.binary[N-1] << "-" << Q1 << " ->";
+            if (Q1 == 0)
+                std::cout << " A = A-reg_1\n";
+            else
+                std::cout << " A = A+reg_1\n";
+
+        }
+//        shifting
+        A1 = A.binary[N-1];
+        A = A >> 1;
+        Q1 = reg_2.binary[N-1];
+        reg_2 = reg_2 >> 1;
+        reg_2.setIndexedVal(0, A1);
+//        reg_2[0] = A1;
+
+        if (show_mul) {
+            std::cout << A.binary << " |";
+            std::cout << std::setw(2) << reg_2.binary << " | ";
+            std::cout << std::setw(2) << Q1 << "  | >> shift\n";
+        }
+    }
+
+    if (show_mul){
+        std::cout << '\n' << std::setw(20) <<  "Регистр A";
+        std::cout << std::setw(7) << " | ";
+        std::cout << std::setw(24) << "Регситр reg_2\n";
+        std::cout << A.binary << " | " << reg_2.binary << '\n';
+        std::cout << "Результат умножения: " << getBigNum(A, reg_2);
+    }
+    return A;
+}
+
+Register Register::operator<<(const Register& reg2) const{
+    Register shifted;
+    shifted.setNumber((int)(*this) << reg2.number);
+    return shifted;
+}
+
+
+Register Register::operator<<(int num) const{
+    Register shifted;
+    shifted.setNumber((int)(*this) << num);
+    return shifted;
+}
+
+
+Register Register::operator>>(const Register& reg_2) const{
+    Register shifted;
+    shifted.setNumber((int)(*this) >> reg_2.number);
+    return shifted;
+}
+
+
+Register Register::operator>>(int num) const{
+    Register shifted;
+    shifted.setNumber(this->number >> num);
+    return shifted;
 }
 
 

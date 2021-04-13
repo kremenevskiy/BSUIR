@@ -8,7 +8,10 @@
 #include <iostream>
 #include <vector>
 #include <iomanip>
-#define show true
+#define show_add false
+#define show_sub false
+#define show_mul true
+#define show_div true
 
 
 
@@ -45,11 +48,16 @@ public:
     static Register reverseBits(const Register &reg);
     void reverseBits();
 
+    static int getBigNum(const Register& reg_1, const Register& reg_2);
+
     Register& operator=(const Register& reg);
 
+private:
     int& operator[](const int index);
     const int& operator[](const int index) const;
 
+public:
+    void setIndexedVal(int index, int value);
     Register& operator++();
     Register operator++(int);
 
@@ -60,6 +68,13 @@ public:
     Register operator-(const Register& reg_2);
     Register operator-(int& num);
     friend Register operator-(int& num, Register& reg_2);
+
+    Register operator*(Register& reg2);
+
+    Register operator<<(const Register& reg2) const;
+    Register operator<<(int num) const;
+    Register operator>>(const Register& reg_2) const;
+    Register operator>>(int num) const;
 
     friend std::ostream& operator<< (std::ostream &out, const Register& reg);
     friend std::istream& operator>> (std::istream &in, Register& reg);
