@@ -14,62 +14,62 @@ enum color{
 };
 
 
-//template <class T>
+template <class T>
 class Node {
 public:
-    int data;
-    int key;
-    Node *parent;
-    Node *left;
-    Node *right;
+    T data;
+    T key;
+    Node<T> *parent;
+    Node<T> *left;
+    Node<T> *right;
     color color;
 };
 
 
-//template <class T>
+template <class T>
 class RBTree {
 public:
-    Node *root;
+    Node<T> *root;
 
 //    Node* null_node;
 
-    Node * getNullNode(Node * parent);
+    Node<T> * getNullNode(Node<T> * parent);
 
-    bool isNull(Node *x);
+    bool isNull(Node<T> *x);
 
     RBTree();
 
-    void preOrder(Node * node);
-    void inOrderLeft(Node * node);
-    void inOrderRight(Node * node);
-    void postOrder(Node * node);
+    void preOrder(Node<T> * node);
+    void inOrderLeft(Node<T> * node);
+    void inOrderRight(Node<T> * node);
+    void postOrder(Node<T> * node);
 
 
 
-    void leftRotate(Node *x);
-    void rightRotate(Node *x);
-    void insert(int key);
-    void insertNode(Node *x);
-    void insertFixUp(Node *x);
+    void leftRotate(Node<T> *x);
+    void rightRotate(Node<T> *x);
+    void insert(T key);
+    void insertNode(Node<T> *x);
+    void insertFixUp(Node<T> *x);
 
 
 
-    void transplant(Node *u, Node *v);
-    Node* tree_min(Node *x);
-    Node* tree_max(Node *x);
-    Node* search(Node * root, int key);
+    void transplant(Node<T> *u, Node<T> *v);
+    Node<T>* tree_min(Node<T> *x);
+    Node<T>* tree_max(Node<T> *x);
+    Node<T>* search(Node<T> * root, T key);
 
 
-    void remove_one(Node *z);
-    void deleteFixUp(Node *x);
+    void remove_one(Node<T> *z);
+    void deleteFixUp(Node<T> *x);
 
-    void remove(int key);
+    void remove(T key);
 
-    void swapColor(Node *x);
-    color getColor(Node *x);
+    void swapColor(Node<T> *x);
+    color getColor(Node<T> *x);
 
 
-    Node * getNewNode(int data);
+    Node<T> * getNewNode(T data);
 
 };
 

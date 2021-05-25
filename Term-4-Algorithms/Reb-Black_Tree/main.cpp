@@ -20,7 +20,7 @@ std::vector<int> generateArr(const int N) {
 }
 
 
-void insertTask(RBTree &tree, std::vector<int> &nums) {
+void insertTask(RBTree<int> &tree, std::vector<int> &nums) {
     for (int i = 0; i < nums.size(); ++i) {
         tree.insert(nums[i]);
     }
@@ -46,7 +46,7 @@ void insertMapTest(std::map<int, int> map, std::vector<std::pair<int, int>> & co
 }
 
 
-void deleteTask(RBTree &tree, const int N) {
+void deleteTask(RBTree<int> &tree, const int N) {
     for(int i = 0; i < 100; ++i) {
         int num = rand() % MAX;
         tree.remove(num);
@@ -60,7 +60,7 @@ int main() {
     const int N = 1000000;
     const int N_delete = N;
 
-    RBTree bst;
+    RBTree<int> bst;
     std::vector<int> nums = generateArr(N);
 
 
