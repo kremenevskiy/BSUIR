@@ -73,10 +73,7 @@ public:
 
 
     Node<T> * getNewNode(T data);
-
-
-
-
+    
     class iterator {
     public:
         Node<T> * ptr;
@@ -89,12 +86,14 @@ public:
             ptr = x;
         }
 
+
         bool operator == (const iterator & it) const{
             if (isNull(this->ptr) && isNull(it.ptr)){
                 return true ;
             }
             return this->ptr == it.ptr;
         }
+
 
         bool operator != (const iterator & it) const {
             if (isNull(this->ptr) && isNull(it.ptr)){
@@ -103,9 +102,11 @@ public:
             return this->ptr != it.ptr;
         }
 
+
         T& value() {
             return this->ptr->data;
         }
+
 
         iterator &operator++() {
             if (!isNull(ptr->right)) {
@@ -121,6 +122,7 @@ public:
             return *this;
 
         }
+
 
         iterator operator++(int) {
 
@@ -140,7 +142,6 @@ public:
         }
 
 
-
         iterator &operator--() {
             if (isNull(ptr->left)) {
                 ptr = tree_max(ptr->left);
@@ -154,6 +155,7 @@ public:
             ptr = y;
             return *this;
         }
+
 
         iterator operator--(int) {
 
@@ -182,6 +184,7 @@ public:
         return iterator(vrt);
     }
 
+
     iterator find(T key) {
         Node<T> * searched = search(this->root, key);
         if (!isNull(searched)) {
@@ -198,6 +201,7 @@ public:
         }
         return iterator(vrt);
     }
+
 
     iterator end() {
         return iterator(tree_max(root)->right);
