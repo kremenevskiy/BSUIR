@@ -9,18 +9,21 @@
 #include <unordered_set>
 #include <map>
 
-const int MAX = 10000;
+const int MAX = 100000;
 
 std::vector<int> generateArr(const int N) {
     std::vector<int> arr(N, 0);
     for (int i = 0; i < N; ++i) {
         arr[i] = rand() % MAX;
+//        std::cout << arr[i] << " ";
     }
+//    std::cout << '\n';
     return arr;
 }
 
 
 void insertTask(RBTree<int> &tree, std::vector<int> &nums) {
+    std::cout << "---Inserting " << nums.size() << " elements!!\n";
     for (int i = 0; i < nums.size(); ++i) {
         tree.insert(nums[i]);
     }
@@ -77,8 +80,25 @@ int main() {
     auto end = clock();
     double time_taken = std::difftime(end, start) / CLOCKS_PER_SEC;
 
-    std::cout << "Time taken: " << time_taken << "\n";
+//    std::cout << "Time taken: " << time_taken << "\n";
     std::cout << "Execution time: " << std::setprecision(6) << std::fixed << time_taken << " sec\n";
+
+
+
+
+    // iterator working
+//    std::cout << "Reb black tree values:\n\t";
+//    for(auto it = bst.begin(); it != bst.end(); it++) {
+//        std::cout << it.value() << ' ';
+//    }
+
+
+    // find test
+//    int findKey = 5;
+//    auto it = bst.find(findKey);
+//    if (it != bst.end()) {
+//        std::cout << "\nFind\n";
+//    }
 
     return 0;
 }
