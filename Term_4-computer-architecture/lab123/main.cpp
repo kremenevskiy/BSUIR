@@ -10,11 +10,12 @@ void handleInput();
 
 int main() {
 
-    Register a(-32768);
-    Register b(-1);
+    Register a(4000121);
+    Register b(399);
 
     Register res;
-    res = a / b;
+    res = a * b;
+    std::cout << (int)res << '\n';
 
 //    handleInput();
 

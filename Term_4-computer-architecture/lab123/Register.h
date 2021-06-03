@@ -11,14 +11,14 @@
 
 #define show_add false
 #define show_sub false
-#define show_mul false
-#define show_div true
+#define show_mul true
+#define show_div false
 
 
 
 class Register{
 
-    static const int N = 16;
+    static const int N = 32;
     int number;
     std::vector<int> binary;
 
