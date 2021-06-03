@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/kremenevskiy/Desktop/labs/Term_4-computer-architecture/lab456/Float.h
+iostream
+-
+vector
+-
+cmath
+-
+iomanip
+-
+
+/Users/kremenevskiy/Desktop/labs/Term_4-computer-architecture/lab456/main.cpp
+iostream
+-
+bitset
+-
+Float.h
+/Users/kremenevskiy/Desktop/labs/Term_4-computer-architecture/lab456/Float.h
+
