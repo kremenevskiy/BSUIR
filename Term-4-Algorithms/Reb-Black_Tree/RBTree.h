@@ -73,7 +73,7 @@ public:
 
 
     Node<T> * getNewNode(T data);
-    
+
     class iterator {
     public:
         Node<T> * ptr;
