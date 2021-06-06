@@ -1,0 +1,1 @@
+[['type', 'list'], ['value', [[['type', 'str'], ['value', 'first']], [['type', 'str'], ['value', 'second']], [['type', 'int'], ['value', '3']], [['type', 'dict'], ['value', [[[['type', 'str'], ['value', 'number']], [['type', 'int'], ['value', '4']]]]]]]]]
