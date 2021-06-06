@@ -1,7 +1,7 @@
 !!python/tuple
 - !!python/tuple
   - type
-  - list
+  - tuple
 - !!python/tuple
   - value
   - !!python/tuple
@@ -11,21 +11,7 @@
         - str
       - !!python/tuple
         - value
-        - first
-    - !!python/tuple
-      - !!python/tuple
-        - type
-        - str
-      - !!python/tuple
-        - value
-        - second
-    - !!python/tuple
-      - !!python/tuple
-        - type
-        - int
-      - !!python/tuple
-        - value
-        - 3
+        - test_tuple
     - !!python/tuple
       - !!python/tuple
         - type
@@ -40,11 +26,32 @@
                 - str
               - !!python/tuple
                 - value
-                - number
+                - status
             - !!python/tuple
               - !!python/tuple
                 - type
-                - int
+                - str
               - !!python/tuple
                 - value
-                - 4
+                - ok
+    - !!python/tuple
+      - !!python/tuple
+        - type
+        - tuple
+      - !!python/tuple
+        - value
+        - !!python/tuple
+          - !!python/tuple
+            - !!python/tuple
+              - type
+              - str
+            - !!python/tuple
+              - value
+              - nested_tuple
+          - !!python/tuple
+            - !!python/tuple
+              - type
+              - str
+            - !!python/tuple
+              - value
+              - one_more
