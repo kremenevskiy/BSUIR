@@ -4,16 +4,15 @@ from serializer.parsers.toml.toml import TomlParser
 
 
 class Parser:
-    class ParserFactory:
 
-        @staticmethod
-        def create_parser(name: str):
-            name = name.lower()
-            if name == "json":
-                return JsonParser()
-            elif name == "yaml":
-                return YamlParser()
-            elif name == "toml":
-                return TomlParser()
-            else:
-                raise ValueError
+    @staticmethod
+    def create_parser(name: str):
+        name = name.lower()
+        if name == "json":
+            return JsonParser()
+        elif name == "yaml":
+            return YamlParser()
+        elif name == "toml":
+            return TomlParser()
+        else:
+            raise ValueError
