@@ -47,13 +47,13 @@ class Serializer:
             res['value'] = tuple((k, res['value'][k]) for k in res['value'])
         elif obj_type == list:
             res['type'] = 'list'
-            res['value'] = tuple(Serializer.serialize(i) for i in obj)
+            res['value'] = tuple([Serializer.serialize(i) for i in obj])
         elif obj_type == tuple:
             res['type'] = 'tuple'
-            res['value'] = tuple(Serializer.serialize(i) for i in obj)
+            res['value'] = tuple([Serializer.serialize(i) for i in obj])
         elif obj_type == bytes:
             res['type'] = 'bytes'
-            res['value'] = tuple([Serializer.serialize(i)] for i in obj)
+            res['value'] = tuple([Serializer.serialize(i) for i in obj])
 
         elif obj is None:
             res['type'] = 'NoneType'
@@ -78,7 +78,7 @@ class Serializer:
                     globals_d = {}
                     for name in names:
                         if name == obj.__name__:
-                            globals_d[name] = obj.__name
+                            globals_d[name] = obj.__name__
                         elif name in glob and not inspect.ismodule(name) and name not in __builtins__:
                             globals_d[name] = glob[name]
                     res['value'][key] = Serializer.serialize(globals_d)
@@ -109,13 +109,13 @@ class Serializer:
         res = None
         if obj_type == 'list':
             res = [Serializer.deserialize(i) for i in d['value']]
+        elif obj_type == 'tuple':
+            res = tuple([Serializer.deserialize(i) for i in d['value']])
         elif obj_type == 'dict':
             res = {}
             for i in d['value']:
                 value = Serializer.deserialize(i[1])
                 res[Serializer.deserialize(i[0])] = value
-        elif obj_type == 'tuple':
-            res = tuple([Serializer.deserialize(i) for i in d['value']])
         elif obj_type == 'function':
             func = [0] * 4
             code = [0] * 16
