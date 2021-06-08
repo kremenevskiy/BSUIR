@@ -190,10 +190,10 @@ class CartProduct(models.Model):
     content_object = GenericForeignKey('content_type', 'object_id')
 
     qty = models.PositiveIntegerField(default=1)
-    final_price = models.DecimalField(max_digits=9, decimal_places=2, verbose_name='Final Price')
+    final_price = models.DecimalField(max_digits=9, decimal_places=2, default=0, verbose_name='Final Price')
 
     def __str__(self):
-        return f'Product: {self.product.title} (for cart)'
+        return f'Product: {self.content_object.title} (for cart)'
 
 
 class Cart(models.Model):
@@ -201,6 +201,8 @@ class Cart(models.Model):
     products = models.ManyToManyField(CartProduct, blank=True, related_name='related_cart')
     total_products = models.PositiveIntegerField(default=0)
     final_price = models.DecimalField(max_digits=9, decimal_places=2, verbose_name='Final Price')
+    in_order = models.BooleanField(default=False)
+    for_anonymous_user = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.id)
