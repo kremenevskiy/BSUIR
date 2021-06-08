@@ -16,8 +16,8 @@ class NotebookAdminForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['image'].help_text = mark_safe(
-            '<span style="color:red; font-size:14px">Upload image with min resolution {}x{}</span>'.format(
-                *Product.MIN_RESOLUTION
+            """<span style="color:red; font-size:14px">When upload image is more than {}x{} it will reduced</span>""".format(
+                *Product.MAX_RESOLUTION
             )
         )
 
@@ -28,12 +28,14 @@ class NotebookAdminForm(ModelForm):
         max_height, max_width = Product.MAX_RESOLUTION
 
         if image.size > Product.MAX_IMAGE_SIZE:
+            print(image.size)
+            print(Product.MAX_IMAGE_SIZE)
             raise ValidationError('Size of image couldn\'t be more than 3Mb')
-        if img.height < min_height or img.width < min_width:
-            raise ValidationError('Resolution of image less then min accepted resolution')
-        # print(img.width, img.height)
-        if img.height > max_height or img.width > max_width:
-            raise ValidationError('Resolution of image more then max accepted resolution')
+        # if img.height < min_height or img.width < min_width:
+        #     raise ValidationError('Resolution of image less then min accepted resolution')
+        # # print(img.width, img.height)
+        # if img.height > max_height or img.width > max_width:
+        #     raise ValidationError('Resolution of image more then max accepted resolution')
         # print(img.width, img.height)
         return image
 
