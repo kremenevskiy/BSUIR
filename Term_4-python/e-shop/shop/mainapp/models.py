@@ -120,4 +120,3 @@ class Customer(models.Model):
 #     def __str__(self):
 #         return f'Characteristics for Product: {self.name}'
 
-
