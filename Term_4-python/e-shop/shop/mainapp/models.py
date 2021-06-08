@@ -132,13 +132,13 @@ class Notebook(Product):
 
 class Smartphone(Product):
     diagonal = models.CharField(max_length=255, verbose_name='diagonal')
-    display = models.CharField(max_length= 255, verbose_name='display type')
+    display = models.CharField(max_length=255, verbose_name='display type')
     resolution = models.CharField(max_length=255, verbose_name='display resolution')
     accum_volume = models.CharField(max_length=255, verbose_name='accum volume')
     ram = models.CharField(max_length=255, verbose_name='RAM')
     sd = models.BooleanField(default=True)
     sd_volume_max = models.CharField(max_length=255, verbose_name='Max volume of hdd storage')
-    main_cap_mp = models.CharField(max_length=255, verbose_name='Main camera')
+    main_cam_mp = models.CharField(max_length=255, verbose_name='Main camera')
     frontal_cam_mp = models.CharField(max_length=255, verbose_name='Front camera')
 
     def __str__(self):
