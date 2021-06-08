@@ -43,6 +43,34 @@ class Product(models.Model):
         return self.title
 
 
+class Notebook(Product):
+    diagonal = models.CharField(max_length=255, verbose_name='diagonal')
+    display = models.CharField(max_length=255, verbose_name='display type')
+    processor_freq = models.CharField(max_length=255, verbose_name='Processor Frequency')
+    ram = models.CharField(max_length=255, verbose_name='RAM')
+    video = models.CharField(max_length=255, verbose_name='Video Card')
+    time_without_charge = models.CharField(max_length=255, verbose_name='Battery work time')
+
+    def __str__(self):
+        return f'{self.category.name} : {self.title}'
+
+
+class Smartphone(Product):
+    diagonal = models.CharField(max_length=255, verbose_name='diagonal')
+    display = models.CharField(max_length=255, verbose_name='display type')
+    resolution = models.CharField(max_length=255, verbose_name='display resolution')
+    accum_volume = models.CharField(max_length=255, verbose_name='accum volume')
+    ram = models.CharField(max_length=255, verbose_name='RAM')
+    sd = models.BooleanField(default=True)
+    sd_volume_max = models.CharField(max_length=255, verbose_name='Max volume of hdd storage')
+    main_cap_mp = models.CharField(max_length=255, verbose_name='Main camera')
+    forntal_cam_mp = models.CharField(max_length=255, verbose_name='Front camera')
+
+    def __str__(self):
+        return f'{self.category.name} : {self.title}'
+
+
+
 # # specific characteristics
 # class NotebookProduct(Product):
 
@@ -91,4 +119,5 @@ class Customer(models.Model):
 #
 #     def __str__(self):
 #         return f'Characteristics for Product: {self.name}'
+
 
