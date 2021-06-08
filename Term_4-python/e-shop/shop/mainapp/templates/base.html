@@ -67,7 +67,6 @@
             <div class="container px-4 px-lg-5 mt-5">
                 {% block content %}
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-
                     {% for product in products %}
                     <div class="col mb-5">
                         <div class="card h-100">
@@ -80,6 +79,9 @@
                                     <a href="{{ product.get_absolute_url }}"><h5 class="fw-bolder">{{product.title}}</h5></a>
                                     <!-- Product price-->
                                     <h5>{{ product.price }} $</h5>
+                                    <a href="{% url 'add_to_cart' ct_model=product.get_model_name slug=product.slug %}">
+                                        <button class="brn btn-danger">Add to Cart</button>
+                                    </a>
 <!--                                    <p class="card-text">{{product.description}}</p>-->
                                 </div>
                             </div>
