@@ -16,7 +16,7 @@ from .utils import recalc_cart
 class BaseView(CartMixin, View):
     def get(self, request, *args, **kwargs):
         categories = Category.objects.get_categories_for_left_sidebar()
-        products = LatestProducts.objects.get_products_for_main_page('notebook', 'smartphone', with_respect_to='smartphone')
+        products = LatestProducts.objects.get_products_for_main_page('notebook', 'smartphone', with_respect_to='notebook')
         context = {
             'categories': categories,
             'products': products,
