@@ -64,4 +64,5 @@ admin.site.register(Smartphone, SmartphoneAdmin)
 admin.site.register(CartProduct)
 admin.site.register(Cart)
 admin.site.register(Customer)
+admin.site.register(Order)
 
