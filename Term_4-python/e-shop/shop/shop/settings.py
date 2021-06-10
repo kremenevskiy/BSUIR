@@ -77,28 +77,28 @@ WSGI_APPLICATION = 'shop.wsgi.application'
 
 
 # locally
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'shop_database',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
-
-# with docker
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'postgres',
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'shop_database',
 #         'USER': 'postgres',
 #         'PASSWORD': 'postgres',
-#         'HOST': 'db',
+#         'HOST': 'localhost',
 #         'PORT': '5432',
 #     }
 # }
+
+# with docker
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'db',
+        'PORT': '5432',
+    }
+}
 
 
 # Password validation
