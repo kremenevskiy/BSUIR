@@ -10,7 +10,7 @@
 #### 2. Run it terminal:
 ```angular2html
 wget https://raw.githubusercontent.com/kremenevskiy/BSUIR/master/Term_4-python/e-shop/docker-compose-prod.yml
-docker-compose -f docker-compose-prod.yml up --build
+docker-compose -f docker-compose-prod.yml up
 ```
 #### 3. Visit host in a browser: localhost:8000
 
