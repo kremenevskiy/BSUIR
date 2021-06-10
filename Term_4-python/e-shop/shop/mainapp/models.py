@@ -189,7 +189,7 @@ class Smartphone(Product):
 
 
 class CartProduct(models.Model):
-    user = models.ForeignKey('Customer', verbose_name='Customer', on_delete=models.CASCADE)
+    user = models.ForeignKey('Customer', verbose_name='Customer', on_delete=models.CASCADE, null=True)
     cart = models.ForeignKey('Cart', verbose_name='Cart', on_delete=models.CASCADE, related_name='related_products')
 
     # product = models.ForeignKey(Product, verbose_name='Product', on_delete=models.CASCADE)
