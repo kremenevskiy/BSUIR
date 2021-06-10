@@ -9,8 +9,6 @@
 #### 1. Download file: docker-compose-prod.yml
 #### 2. Run it terminal:
 ```angular2html
-git clone git@github.com:kremenevskiy/BSUIR.git
-cd BSUIR/Term_4-python/e-shop
 wget https://raw.githubusercontent.com/kremenevskiy/BSUIR/master/Term_4-python/e-shop/docker-compose-prod.yml
 docker-compose -f docker-compose-prod.yml up --build
 ```

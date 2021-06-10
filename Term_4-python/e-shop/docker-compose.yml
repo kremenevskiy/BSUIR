@@ -12,7 +12,7 @@ services:
   web:
     build: .
     command: bash -c "
-      chmod +x ./wait_db.sh
+      chmod +x ./wait_db.sh &&
       ./wait_db.sh &&
       python ./shop/manage.py makemigrations &&
       python ./shop/manage.py migrate &&
