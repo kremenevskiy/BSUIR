@@ -12,7 +12,7 @@
 wget https://raw.githubusercontent.com/kremenevskiy/BSUIR/master/Term_4-python/e-shop/docker-compose-prod.yml
 docker-compose -f docker-compose-prod.yml up
 ```
-#### 3. Visit host in a browser: localhost:8000
+#### 3. Visit host in a browser: 0.0.0.0:8000
 
 ### - Dev Mode
 #### 1. Clone current git directory
@@ -22,7 +22,7 @@ git clone git@github.com:kremenevskiy/BSUIR.git
 cd BSUIR/Term_4-python/e-shop
 docker-compose up --build
 ```
-#### 3. Visit host in a browser: localhost:8000
+#### 3. Visit host in a browser: 127.0.0.1:8000
 
 
 

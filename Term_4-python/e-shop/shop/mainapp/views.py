@@ -80,6 +80,7 @@ class AddToCartView(CartMixin, View):
             object_id=product.id
 
         )
+
         if created:
             self.cart.products.add(cart_product)
         # self.cart.save()
@@ -158,25 +159,30 @@ class MakeOrderView(CartMixin, View):
     @transaction.atomic
     def post(self, request, *args, **kwargs):
         form = OrderForm(request.POST or None)
-        customer = Customer.objects.get(user=request.user)
-        if form.is_valid():
-            new_order = form.save(commit=False)
-            new_order.customer = customer
-            new_order.first_name = form.cleaned_data['first_name']
-            new_order.last_name = form.cleaned_data['last_name']
-            new_order.phone = form.cleaned_data['phone']
-            new_order.address = form.cleaned_data['address']
-            new_order.buying_type = form.cleaned_data['buying_type']
-            new_order.order_date = form.cleaned_data['order_date']
-            new_order.comment = form.cleaned_data['comment']
-            new_order.save()
-            self.cart.in_order = True
-            self.cart.save()
-            new_order.cart = self.cart
-            new_order.save()
-            customer.orders.add(new_order)
-            messages.add_message(request, messages.INFO, "Thank you for ordering. Manager will contact you")
+        if not request.user.is_authenticated:
+            messages.add_message(request, messages.INFO, "Thank you for ordering. Manager will contact you (Or not :)")
             return HttpResponseRedirect('/')
-        return HttpResponseRedirect('/checkout/')
+        else:
+            customer = Customer.objects.get(user=request.user)
+
+            if form.is_valid():
+                new_order = form.save(commit=False)
+                new_order.customer = customer
+                new_order.first_name = form.cleaned_data['first_name']
+                new_order.last_name = form.cleaned_data['last_name']
+                new_order.phone = form.cleaned_data['phone']
+                new_order.address = form.cleaned_data['address']
+                new_order.buying_type = form.cleaned_data['buying_type']
+                new_order.order_date = form.cleaned_data['order_date']
+                new_order.comment = form.cleaned_data['comment']
+                new_order.save()
+                self.cart.in_order = True
+                self.cart.save()
+                new_order.cart = self.cart
+                new_order.save()
+                customer.orders.add(new_order)
+                messages.add_message(request, messages.INFO, "Thank you for ordering. Manager will contact you")
+                return HttpResponseRedirect('/')
+            return HttpResponseRedirect('/checkout/')
 
 
