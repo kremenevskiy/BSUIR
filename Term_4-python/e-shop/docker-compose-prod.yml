@@ -11,7 +11,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
   web:
-    image: kremenevskiy/eshop-img:3
+    image: kremenevskiy/eshop-img:4
     command: bash -c "
       chmod +x ./wait_db.sh &&
       ./wait_db.sh &&
