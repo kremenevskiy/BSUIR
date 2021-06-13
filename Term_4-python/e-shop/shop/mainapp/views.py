@@ -1,15 +1,16 @@
+from django.contrib import messages
+from django.contrib.contenttypes.models import ContentType
 from django.db import transaction
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic import DetailView, View
-from django.http import HttpResponseRedirect
-from django.contrib.contenttypes.models import ContentType
-from django.contrib import messages
-
-from .models import Notebook, Smartphone, Category, LatestProducts, Customer, Cart, CartProduct
-from .mixins import CategoryDetailMixin, CartMixin
 
 from .forms import OrderForm
+from .mixins import CategoryDetailMixin, CartMixin
+from .models import Notebook, Smartphone, Category, LatestProducts, Customer, CartProduct
 from .utils import recalc_cart
+
+
 # Create your views here.
 
 

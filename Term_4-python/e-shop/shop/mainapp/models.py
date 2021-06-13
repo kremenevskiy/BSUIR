@@ -1,16 +1,14 @@
 import sys
-from PIL import Image
-from django.db import models
-from django.contrib.auth import get_user_model
-from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes.fields import GenericForeignKey
-from django.core.files.uploadedfile import InMemoryUploadedFile
-
 from io import BytesIO
 
+from PIL import Image
+from django.contrib.auth import get_user_model
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
+from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.db import models
 from django.urls import reverse
 from django.utils import timezone
-
 
 User = get_user_model()
 
@@ -265,7 +263,7 @@ class Order(models.Model):
         (BUYING_TYPE_DELIVERY, 'Delivery')
     }
 
-    customer = models.ForeignKey(Customer, verbose_name='Customer', related_name='related_orders', on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customer, verbose_name='Customer', related_name='related_orders', null=True, blank=True, on_delete=models.CASCADE)
     cart = models.ForeignKey(Cart, verbose_name='Cart', on_delete=models.CASCADE, null=True, blank=True)
     first_name = models.CharField(max_length=255, verbose_name='Name')
     last_name = models.CharField(max_length=255, verbose_name='Surname')

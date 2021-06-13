@@ -6,10 +6,11 @@
 
 ## How to run:
 ### - Production Mode
-#### 1. Download file: docker-compose-prod.yml
+#### 1. Download file: docker-compose-prod.yml, .env.dev
 #### 2. Run it terminal:
 ```angular2html
 wget https://raw.githubusercontent.com/kremenevskiy/BSUIR/master/Term_4-python/e-shop/docker-compose-prod.yml
+wget https://raw.githubusercontent.com/kremenevskiy/BSUIR/master/Term_4-python/e-shop/.env.dev
 docker-compose -f docker-compose-prod.yml up
 ```
 #### 3. Visit host in a browser: 0.0.0.0:8000
@@ -22,7 +23,7 @@ git clone git@github.com:kremenevskiy/BSUIR.git
 cd BSUIR/Term_4-python/e-shop
 docker-compose up --build
 ```
-#### 3. Visit host in a browser: 127.0.0.1:8000
+#### 3. Visit host in a browser: 0.0.0.0:8000
 
 
 

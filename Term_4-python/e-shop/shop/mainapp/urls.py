@@ -1,4 +1,5 @@
 from django.urls import path
+
 from .views import (
     BaseView,
     ProductDetailView,
@@ -10,7 +11,6 @@ from .views import (
     CheckoutView,
     MakeOrderView
 )
-
 
 urlpatterns = [
     path('', BaseView.as_view(), name='base'),
