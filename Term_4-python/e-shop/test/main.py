@@ -1,19 +1,22 @@
-# This is a sample Python script.
-import time
-
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+from threading import *
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+class GreetHi(Thread):
+    def run(self):
+        for i in range(5000):
+            print('Hi')
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    while True:
-        print('h')
-        time.sleep(2)
+class GreetHello(Thread):
+    def run(self):
+        for i in range(5000):
+            print('Hello')
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+t1 = GreetHi()
+t2 = GreetHello()
+
+t1.start()
+t2.start()
+
+
