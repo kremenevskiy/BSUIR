@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate, login
 
 from .forms import OrderForm, LoginForm, RegistrationForm
 from .mixins import CategoryDetailMixin, CartMixin
-from .models import Notebook, Smartphone, Category, LatestProducts, Customer, CartProduct
+from .models import Notebook, Smartphone, Category, LatestProducts, Customer, CartProduct, Order
 from .utils import recalc_cart
 
 
@@ -247,3 +247,22 @@ class RegistrationView(CartMixin, View):
             return HttpResponseRedirect('/')
         context = {'form': form, 'cart': self.cart}
         return render(request, 'registration.html', context)
+
+
+class ProfileView(CartMixin, View):
+
+    def get(self, request, *args, **kwargs):
+        customer = Customer.objects.get(user=request.user)
+        orders = Order.objects.filter(customer=customer).order_by('-created_at')
+        # categories = Category.objects.all()
+        categories = Category.objects.get_categories_for_left_sidebar()
+        context = {
+            'orders': orders,
+            'cart': self.cart,
+            'categories': categories
+        }
+        return render(
+            request,
+            'profile.html',
+            context
+        )

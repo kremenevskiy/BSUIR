@@ -25,6 +25,24 @@ docker-compose up --build
 ```
 #### 3. Visit host in a browser: 0.0.0.0:8000
 
+## Functionality:
+
+- view different products
+- chose product want to buy
+- look at product details (specifications)
+- put product to the cart
+- put other products to the cart
+- make order of chosen products
+- see made orders in logged user profile
+- see details about made orders
+- login
+- registration
+- make order for unlogged
+- add your products from admin account
+- change all created products from admin
+- CRUD operations
+
+
 
 
 

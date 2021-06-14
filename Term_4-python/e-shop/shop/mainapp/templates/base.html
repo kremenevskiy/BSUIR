@@ -49,9 +49,9 @@
                             {% if request.user.is_authenticated %}
                                 <span class="navbar text" style="font-size:  20px;">Welcome,
                                     <span class="badge badge-danger">
-                                        <a style="text-decoration: none; font-size: 20px;" href="#">{{ request.user.username }}</a>
-                                    </span>
-                                </span> | <a href="{% url 'logout' %}">Logout</a>
+                                        <a style="text-decoration: none; font-size: 20px;" href="{% url 'profile' %}">{{ request.user.username }}</a>
+                                    </span> | <a href="{% url 'logout' %}" class="nav-link badge badge-danger" style="color: #1b1b1b; ">  Logout </a>
+                                </span>
                             {% endif %}
                         </li>
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
@@ -80,21 +80,22 @@
         </nav>
         <!-- Header-->
         <header class="bg-dark py-5">
-            <div class="container px-4 px-lg-5 my-5">
+            <div class="container px-4 px-lg-5 my-1">
+
                 <div class="text-center text-white">
                     <h1 class="display-4 fw-bolder">e-shop</h1>
                     <p class="lead fw-normal text-white-50 mb-0">by kremenevsky</p>
                 </div>
             </div>
-            <div class="col-lg-3 mt-5">
+            <div class="col-lg-3 mt-1">
                 <div class="list-group">
                   {% for category in categories %}
                     <a href="{{ category.url }}" class="list-group-item">{{ category.name }} ({{ category.count }})</a>
                   {% endfor %}
                 </div>
-
-              </div>
+            </div>
         </header>
+
         <!-- Section-->
 
 
