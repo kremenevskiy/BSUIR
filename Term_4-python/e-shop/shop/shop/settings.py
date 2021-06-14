@@ -28,7 +28,7 @@ DEBUG = int(os.environ.get("DEBUG", default=1))
 # DOCKER = 0
 DOCKER = int(os.environ.get("DOCKER", default=0))
 #
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", default="0.0.0.0").split(" ")
+ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", default="127.0.0.1   ").split(" ")
 # ALLOWED_HOSTS = ["127.0.0.1", "localhost", "0.0.0.0"]
 
 
