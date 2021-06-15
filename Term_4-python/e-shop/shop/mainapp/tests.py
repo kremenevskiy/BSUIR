@@ -26,7 +26,7 @@ class ShopTestCases(TestCase):
 
         image = SimpleUploadedFile(
             name="notebook_image.jpg",
-            content=open('./media/macpro_16.jpeg', "rb").read(),
+            content=open('./media/macpro_16.jpeg',"rb").read(),
             content_type="image/jpg")
         self.notebook = Notebook.objects.create(
             category=self.category,
@@ -74,3 +74,29 @@ class ShopTestCases(TestCase):
             request.user = self.user
             response = BaseView.as_view()(request)
             self.assertEqual(response.status_code, 444)
+
+    def test_delete_from_cart(self):
+        self.client.login(username=self.user.username, password='1234')
+        self.cart.products.remove(self.cart_product)
+        recalc_cart(self.cart)
+        self.assertNotIn(self.cart_product, self.cart.products.all())
+        self.assertEqual(self.cart.products.count(), 0)
+
+    def test_change_in_cart(self):
+        self.client.login(username=self.user.username, password='1234')
+        self.cart.products.add(self.cart_product)
+        self.cart_product.qty += 1
+        self.cart_product.save()
+        recalc_cart(self.cart)
+        self.assertIn(self.cart_product, self.cart.products.all())
+        self.assertEqual(self.cart.products.count(), 1)
+        self.assertEqual(self.cart.final_price, Decimal('4000.00'))
+
+    def test_add_to_cart_not_auth(self):
+        self.cart.products.add(self.cart_product)
+        recalc_cart(self.cart)
+        self.assertIn(self.cart_product, self.cart.products.all())
+        self.assertEqual(self.cart.products.count(), 1)
+        self.assertEqual(self.cart.final_price, Decimal('2000.00'))
+
+
