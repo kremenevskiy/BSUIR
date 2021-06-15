@@ -14,8 +14,10 @@ from .mixins import CategoryDetailMixin, CartMixin
 from .models import Notebook, Smartphone, Category, LatestProducts, Customer, CartProduct, Order
 from .utils import recalc_cart
 from threading import Thread
-
-from shop.shop.settings import logging_file, logging_level, EMAIL_HOST_USER
+from threading import Event
+import sys
+sys.path.append("..")
+from shop.settings import logging_file, logging_level, EMAIL_HOST_USER
 import logging
 logging.basicConfig(filename=logging_file, filemode='w', level=getattr(logging, logging_level))
 
@@ -118,7 +120,17 @@ class DeleteFromCartView(CartMixin, View):
         cart_product.delete()
         # self.cart.save()
         recalc_cart(self.cart)
-        messages.add_message(request, messages.INFO, "Product removed successfully")
+        e = Event()
+        t = Thread(target=messages.add_message,
+                   args=(request, messages.INFO, "Product removed successfully"))
+        t.start()
+        t.join(5)
+        if t.is_alive():
+            logging.warning("thread is not done, setting event to kill thread.")
+            e.set()
+        else:
+            logging.info("thread has already finished.")
+        # messages.add_message(request, messages.INFO, "Product removed successfully")
         logging.info("Product deleted successfully")
         return HttpResponseRedirect('/cart/')
 
@@ -140,6 +152,16 @@ class ChangeQTYView(CartMixin, View):
         cart_product.save()
         # self.cart.save()
         recalc_cart(self.cart)
+        e = Event()
+        t = Thread(target=messages.add_message,
+                   args=(request, messages.INFO, "Amount changed successfully"))
+        t.start()
+        t.join(5)
+        if t.is_alive():
+            logging.warning("thread is not done, setting event to kill thread.")
+            e.set()
+        else:
+            logging.info("thread has already finished.")
         messages.add_message(request, messages.INFO, "Amount changed successfully")
         logging.info("Amount changed successfully")
         return HttpResponseRedirect('/cart/')
@@ -197,7 +219,16 @@ class MakeOrderView(CartMixin, View):
                 new_order.cart = self.cart
                 new_order.save()
                 customer.orders.add(new_order)
-                messages.add_message(request, messages.INFO, "Thank you for ordering. Manager will contact you")
+                e = Event()
+                t = Thread(target=messages.add_message, args=(request, messages.INFO, "Thank you for ordering. Manager will contact you"))
+                t.start()
+                t.join(5)
+                if t.is_alive():
+                    logging.warning("thread is not done, setting event to kill thread.")
+                    e.set()
+                else:
+                    logging.info("thread has already finished.")
+                # messages.add_message(request, messages.INFO, "Thank you for ordering. Manager will contact you")
                 return HttpResponseRedirect('/')
             return HttpResponseRedirect('/checkout/')
 
@@ -258,6 +289,17 @@ class RegistrationView(CartMixin, View):
             )
             user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
             login(request, user)
+            message = f'''Dear, {user.first_name} {user.last_name} successful registration!'''
+            e = Event()
+            t = Thread(target=send_mail, args=('eShop registration', message, EMAIL_HOST_USER,
+                                               [user.email]), kwargs={'fail_silently': False})
+            t.start()
+            t.join(10)
+            if t.is_alive():
+                logging.warning("thread is not done, setting event to kill thread.")
+                e.set()
+            else:
+                logging.info("thread has already finished.")
             return HttpResponseRedirect('/')
         context = {'form': form, 'cart': self.cart}
         return render(request, 'registration.html', context)
