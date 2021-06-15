@@ -160,3 +160,12 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+logging_file = 'app.log'
+logging_level = 'INFO'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'shop1234django@gmail.com'
+EMAIL_HOST_PASSWORD = 's1h2o3p4'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

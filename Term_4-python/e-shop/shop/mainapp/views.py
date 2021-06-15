@@ -6,10 +6,18 @@ from django.shortcuts import render
 from django.views.generic import DetailView, View
 from django.contrib.auth import authenticate, login
 
+from django.core.mail import send_mail, EmailMessage
+
+
 from .forms import OrderForm, LoginForm, RegistrationForm
 from .mixins import CategoryDetailMixin, CartMixin
 from .models import Notebook, Smartphone, Category, LatestProducts, Customer, CartProduct, Order
 from .utils import recalc_cart
+from threading import Thread
+
+from shop.shop.settings import logging_file, logging_level, EMAIL_HOST_USER
+import logging
+logging.basicConfig(filename=logging_file, filemode='w', level=getattr(logging, logging_level))
 
 
 # Create your views here.
@@ -75,6 +83,9 @@ class AddToCartView(CartMixin, View):
         ct_model, product_slug = kwargs.get('ct_model'), kwargs.get('slug')
         content_type = ContentType.objects.get(model=ct_model)
         product = content_type.model_class().objects.get(slug=product_slug)
+        if self.cart is None:
+            messages.error(request, "For add products should be logged in")
+            logging.error("For add products should be logged in")
         cart_product, created = CartProduct.objects.get_or_create(
             user=self.cart.owner,
             cart=self.cart,
@@ -108,6 +119,7 @@ class DeleteFromCartView(CartMixin, View):
         # self.cart.save()
         recalc_cart(self.cart)
         messages.add_message(request, messages.INFO, "Product removed successfully")
+        logging.info("Product deleted successfully")
         return HttpResponseRedirect('/cart/')
 
 
@@ -129,6 +141,7 @@ class ChangeQTYView(CartMixin, View):
         # self.cart.save()
         recalc_cart(self.cart)
         messages.add_message(request, messages.INFO, "Amount changed successfully")
+        logging.info("Amount changed successfully")
         return HttpResponseRedirect('/cart/')
 
 
@@ -166,6 +179,7 @@ class MakeOrderView(CartMixin, View):
             return HttpResponseRedirect('/')
         else:
             customer = Customer.objects.get(user=request.user)
+            logging.info("customer is {}".format(customer.user))
 
             if form.is_valid():
                 new_order = form.save(commit=False)
