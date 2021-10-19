@@ -7,7 +7,7 @@
     <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">/Users/kremenevskiy/.nuget/packages/</NuGetPackageRoot>
     <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">/Users/kremenevskiy/.nuget/packages/</NuGetPackageFolders>
     <NuGetProjectStyle Condition=" '$(NuGetProjectStyle)' == '' ">PackageReference</NuGetProjectStyle>
-    <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">5.10.0</NuGetToolVersion>
+    <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">5.9.1</NuGetToolVersion>
   </PropertyGroup>
   <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <SourceRoot Include="/Users/kremenevskiy/.nuget/packages/" />
@@ -369,7 +369,14 @@
       <Link>wwwroot/js/bootstrap.min.js.map</Link>
     </Content>
   </ItemGroup>
+  <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)microsoft.netcore.app/2.2.8/build/netcoreapp2.2/Microsoft.NETCore.App.props" Condition="Exists('$(NuGetPackageRoot)microsoft.netcore.app/2.2.8/build/netcoreapp2.2/Microsoft.NETCore.App.props')" />
+    <Import Project="$(NuGetPackageRoot)microsoft.entityframeworkcore.design/5.0.11/build/netcoreapp3.0/Microsoft.EntityFrameworkCore.Design.props" Condition="Exists('$(NuGetPackageRoot)microsoft.entityframeworkcore.design/5.0.11/build/netcoreapp3.0/Microsoft.EntityFrameworkCore.Design.props')" />
+    <Import Project="$(NuGetPackageRoot)entityframework/6.4.4/buildTransitive/netcoreapp3.0/EntityFramework.props" Condition="Exists('$(NuGetPackageRoot)entityframework/6.4.4/buildTransitive/netcoreapp3.0/EntityFramework.props')" />
+  </ImportGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <PkgNewtonsoft_Json Condition=" '$(PkgNewtonsoft_Json)' == '' ">/Users/kremenevskiy/.nuget/packages/newtonsoft.json/9.0.1</PkgNewtonsoft_Json>
+    <PkgNewtonsoft_Json Condition=" '$(PkgNewtonsoft_Json)' == '' ">/Users/kremenevskiy/.nuget/packages/newtonsoft.json/10.0.1</PkgNewtonsoft_Json>
+    <PkgMicrosoft_EntityFrameworkCore_Tools_DotNet Condition=" '$(PkgMicrosoft_EntityFrameworkCore_Tools_DotNet)' == '' ">/Users/kremenevskiy/.nuget/packages/microsoft.entityframeworkcore.tools.dotnet/2.0.3</PkgMicrosoft_EntityFrameworkCore_Tools_DotNet>
+    <PkgEntityFramework Condition=" '$(PkgEntityFramework)' == '' ">/Users/kremenevskiy/.nuget/packages/entityframework/6.4.4</PkgEntityFramework>
   </PropertyGroup>
 </Project>
