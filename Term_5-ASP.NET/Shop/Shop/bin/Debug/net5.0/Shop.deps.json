@@ -35,6 +35,7 @@
         "dependencies": {
           "Microsoft.AspNetCore.Mvc.Core": "2.2.5",
           "Microsoft.AspNetCore.StaticFiles": "2.2.0",
+          "bootstrap": "5.1.2",
           "Microsoft.AspNetCore.Antiforgery": "5.0.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions.Reference": "5.0.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "5.0.0.0",
@@ -326,6 +327,7 @@
           "Shop.dll": {}
         }
       },
+      "bootstrap/5.1.2": {},
       "Microsoft.AspNetCore.Authentication.Abstractions/2.2.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Http.Abstractions": "2.2.0",
@@ -2618,6 +2620,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "bootstrap/5.1.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-q67rt/zOhTjlvX0hER9Wao/EohLkwJwbD6wYNorI6e9q3bUz1ZzrZjaCCEpAktAuHzm3HjKeFqENf7bfuHXx3Q==",
+      "path": "bootstrap/5.1.2",
+      "hashPath": "bootstrap.5.1.2.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Authentication.Abstractions/2.2.0": {
       "type": "package",
