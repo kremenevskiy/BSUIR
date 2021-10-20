@@ -35,7 +35,7 @@ namespace Shop.Controllers
             }
             else
             {
-                if (string.Equals("electro", carType, StringComparison.OrdinalIgnoreCase))
+                if (string.Equals("electric", carType, StringComparison.OrdinalIgnoreCase))
                 {
                     cars = _allCars.Cars.Where(i => i.Category.CategoryName.Equals("Electric")).OrderBy(i => i.Id);
                 }

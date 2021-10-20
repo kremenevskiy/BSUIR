@@ -86,5 +86,14 @@
 /Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop/obj/Debug/net5.0/Shop.genruntimeconfig.cache
 /Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop/obj/Debug/net5.0/Razor/Views/Shared/AllCars.cshtml.g.cs
 /Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop/obj/Debug/net5.0/Razor/Views/ShopCart/Index.cshtml.g.cs
-/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop/obj/Debug/net5.0/Shop.csproj.AssemblyReference.cache
 /Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop/obj/Debug/net5.0/Razor/Views/Home/Index.cshtml.g.cs
+/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop/obj/Debug/net5.0/Razor/Views/Order/Checkout.cshtml.g.cs
+/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop/obj/Debug/net5.0/Razor/Views/Order/Complete.cshtml.g.cs
+/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop/bin/Debug/net5.0/Microsoft.AspNetCore.JsonPatch.dll
+/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop/bin/Debug/net5.0/Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
+/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop/bin/Debug/net5.0/Microsoft.AspNetCore.Razor.Language.dll
+/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop/bin/Debug/net5.0/Microsoft.CodeAnalysis.dll
+/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop/bin/Debug/net5.0/Microsoft.CodeAnalysis.CSharp.dll
+/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop/bin/Debug/net5.0/Microsoft.CodeAnalysis.Razor.dll
+/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop/bin/Debug/net5.0/Newtonsoft.Json.Bson.dll
+/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop/obj/Debug/net5.0/Shop.csproj.AssemblyReference.cache

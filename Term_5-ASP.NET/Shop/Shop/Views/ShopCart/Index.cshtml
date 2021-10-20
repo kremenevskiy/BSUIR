@@ -1,6 +1,6 @@
 @model ShopCartViewModel
 <div class="container">
-    @foreach (var el in Model.ShopCart.listShopItem)
+    @foreach (var el in Model.ShopCart.ListShopItems)
     {
         <div class="alert alert-warning mt-3">
             <b>Auto:</b> @el.car.Name <br/>
@@ -8,6 +8,6 @@
         </div>
     }
     <hr/>
-    <div class="btn btn-danger" asp-controller="Order">Pay</div>
+    <a class="btn btn-danger mb-5" asp-controller="Order" asp-action="Checkout" >Pay</a>
     
 </div>

@@ -20,7 +20,7 @@ namespace Shop.Controllers
         public ViewResult Index()
         {
             var items = _shopCart.GetShopItems();
-            _shopCart.listShopItem = items;
+            _shopCart.ListShopItems = items;
 
             var obj = new ShopCartViewModel
             {
@@ -31,7 +31,7 @@ namespace Shop.Controllers
             return View(obj);
         }
 
-        public RedirectToActionResult addToCart(int id)
+        public RedirectToActionResult AddToCart(int id)
         {
             var item = _carRep.Cars.FirstOrDefault(i => i.Id == id);
 

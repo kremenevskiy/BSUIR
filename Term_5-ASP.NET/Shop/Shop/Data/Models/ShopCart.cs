@@ -19,7 +19,7 @@ namespace Shop.Data.Models
         }
         
         public string ShopCartId { get; set; }
-        public List<ShopCartItem> listShopItem { get; set; }
+        public List<ShopCartItem> ListShopItems { get; set; }
 
         public static ShopCart GetCart(IServiceProvider services)
         {

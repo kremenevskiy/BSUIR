@@ -27,7 +27,7 @@ using Shop.Data.Models;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"b4d5d2f218c6e9592961fa6db997e6d05b0a59be", @"/Views/Cars/List.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"bb84fcd003d94b96e6ce799f1d79a13b2c826def", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"05926ca6efb5c3eb0123b3354a037427b89bbef6", @"/Views/_ViewImports.cshtml")]
     public class Views_Cars_List : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998
