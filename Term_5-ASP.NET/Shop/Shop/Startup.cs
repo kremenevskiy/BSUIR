@@ -61,7 +61,14 @@ namespace Shop
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseSession();
-            app.UseMvcWithDefaultRoute(); // default index.html if no url with controller and view
+            // app.UseMvcWithDefaultRoute(); // default index.html if no url with controller and view
+            
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute(name: "categoryFilter", template: "Car/{action}/{carType?}",
+                        defaults: new {Controller = "Car", action = "List"});
+            });
             
             using (var scope = app.ApplicationServices.CreateScope())
             {
