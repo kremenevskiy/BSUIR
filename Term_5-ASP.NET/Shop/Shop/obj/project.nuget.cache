@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "DmzWesa/Ccm2ct9t0qWgLBsu/RESXhJg7RxajijhS0T7WmsfuL6DzeLmUqeWdJv7WaE6t1RO2q09AIDD+U3www==",
+  "dgSpecHash": "xRA6bb0JTfHsh9BAw4KazSzsNshfxn+t57acwAWKdF7/3TFdLI010+Ez3jxPPFha1RRLmVbs304nBUAHAHm0xA==",
   "success": true,
   "projectFilePath": "/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop/Shop.csproj",
   "expectedPackageFiles": [
@@ -31,6 +31,7 @@
     "/Users/kremenevskiy/.nuget/packages/microsoft.aspnetcore.responsecaching.abstractions/2.2.0/microsoft.aspnetcore.responsecaching.abstractions.2.2.0.nupkg.sha512",
     "/Users/kremenevskiy/.nuget/packages/microsoft.aspnetcore.routing/2.2.0/microsoft.aspnetcore.routing.2.2.0.nupkg.sha512",
     "/Users/kremenevskiy/.nuget/packages/microsoft.aspnetcore.routing.abstractions/2.2.0/microsoft.aspnetcore.routing.abstractions.2.2.0.nupkg.sha512",
+    "/Users/kremenevskiy/.nuget/packages/microsoft.aspnetcore.session/2.2.0/microsoft.aspnetcore.session.2.2.0.nupkg.sha512",
     "/Users/kremenevskiy/.nuget/packages/microsoft.aspnetcore.staticfiles/2.2.0/microsoft.aspnetcore.staticfiles.2.2.0.nupkg.sha512",
     "/Users/kremenevskiy/.nuget/packages/microsoft.aspnetcore.webutilities/2.2.0/microsoft.aspnetcore.webutilities.2.2.0.nupkg.sha512",
     "/Users/kremenevskiy/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",

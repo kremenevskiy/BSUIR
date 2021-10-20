@@ -42,8 +42,15 @@ namespace Shop
                 options.UseSqlServer(_confstring.GetConnectionString("DefaultConnection")));
             services.AddTransient<IAllCars, CarRepository>();
             services.AddTransient<ICarsCategory, CategoryRepository>();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped(sp => ShopCart.GetCart(sp));
+            
             services.AddMvc();
             services.AddMvc(options => options.EnableEndpointRouting = false); // хзхзхз без этого не запускалось
+            services.AddMemoryCache();
+            services.AddSession();
+            
 
         }
 
@@ -53,6 +60,7 @@ namespace Shop
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
+            app.UseSession();
             app.UseMvcWithDefaultRoute(); // default index.html if no url with controller and view
             
             using (var scope = app.ApplicationServices.CreateScope())
@@ -60,6 +68,7 @@ namespace Shop
                 var content = scope.ServiceProvider.GetRequiredService<AppDbContent>();
                 DbObjects.Initial(content);
             }
+            
                 
             
             if (env.IsDevelopment())

@@ -19,7 +19,6 @@ namespace Shop.Controllers
 
         public ViewResult List()
         {
-            
             var cars = _allCars.Cars;
             CarsListViewModel obj = new CarsListViewModel();
             obj.AllCars = _allCars.Cars;
@@ -27,5 +26,6 @@ namespace Shop.Controllers
             ViewBag.Title = "Page with autos";
             return View(obj);
         }
+        
     }
 }

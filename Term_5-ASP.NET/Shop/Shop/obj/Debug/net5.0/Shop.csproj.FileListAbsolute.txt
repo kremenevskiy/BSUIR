@@ -84,4 +84,6 @@
 /Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop/obj/Debug/net5.0/ref/Shop.dll
 /Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop/obj/Debug/net5.0/Shop.pdb
 /Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop/obj/Debug/net5.0/Shop.genruntimeconfig.cache
+/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop/obj/Debug/net5.0/Razor/Views/Shared/AllCars.cshtml.g.cs
+/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop/obj/Debug/net5.0/Razor/Views/ShopCart/Index.cshtml.g.cs
 /Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop/obj/Debug/net5.0/Shop.csproj.AssemblyReference.cache

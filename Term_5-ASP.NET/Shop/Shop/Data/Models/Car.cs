@@ -7,7 +7,7 @@ namespace Shop.Data.Models
         public string ShortDescription { set; get; }
         public string LongDescription { set; get; }
         public string Img { set; get; }
-        public uint Price { set; get; }
+        public int Price { set; get; }
         public bool IsFavourite { set; get; }
         public bool IsAvailable { set; get; }
         public bool CategoryId { set; get; }

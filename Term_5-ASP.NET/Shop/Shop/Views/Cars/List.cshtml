@@ -1,12 +1,13 @@
+
 @* @page *@
 @* @model Shop.Views.Cars.List *@
 @* @using Shop.Data.Models *@
 @* @model Shop.ViewModels.CarsListViewModel *@
 @* @using Shop.ViewModels *@
 @* @model CarsListViewModel *@
-@{
-    Layout = "_Layout";
-}
+@* @{ *@
+@*     Layout = "_Layout"; *@
+@* } *@
 
 
 <h1> All auto</h1>
@@ -15,15 +16,9 @@
 <div class="row mt-5 mb-2">
     
     @{
-        foreach (var car in Model.AllCars)
+        foreach (Car car in Model.AllCars)
         {
-            <div class="col-lg-4">
-                <img class="img-thumbnail" src="@car.Img" alt="@car.Name" />
-                <h2> @car.Name</h2>
-                <p>@car.ShortDescription</p>
-                <p>Price: @car.Price.ToString("c")</p>
-                <p><a class="btn btn-warning" href="#">More</a></p>
-            </div>
+            @Html.Partial("AllCars", car)
         }
 
     }
