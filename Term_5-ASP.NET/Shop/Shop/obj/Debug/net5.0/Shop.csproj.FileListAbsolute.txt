@@ -97,3 +97,8 @@
 /Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop/bin/Debug/net5.0/Microsoft.CodeAnalysis.Razor.dll
 /Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop/bin/Debug/net5.0/Newtonsoft.Json.Bson.dll
 /Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop/obj/Debug/net5.0/Shop.csproj.AssemblyReference.cache
+/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop/obj/Debug/net5.0/Razor/Views/Lab1/Index.cshtml.g.cs
+/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop/obj/Debug/net5.0/Razor/Views/Shared/Components/Menu/Default.cshtml.g.cs
+/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop/obj/Debug/net5.0/Razor/Views/Shared/_Layout copy.cshtml.g.cs
+/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop/obj/Debug/net5.0/Razor/Views/Shared/_UserPartial.cshtml.g.cs
+/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop/obj/Debug/net5.0/Razor/Views/Shared/Components/ShopCart/Default.cshtml.g.cs

@@ -5,19 +5,19 @@ namespace Shop.Data.Repository
 {
     public class OrdersRepository : IAllOrders
     {
-        private readonly AppDbContent appDbContent;
+        private readonly ApplicationDbContext _applicationDbContext;
         private readonly ShopCart shopCart;
 
-        public OrdersRepository(AppDbContent appDbContent, ShopCart shopCart)
+        public OrdersRepository(ApplicationDbContext applicationDbContext, ShopCart shopCart)
         {
-            this.appDbContent = appDbContent;
+            this._applicationDbContext = applicationDbContext;
             this.shopCart = shopCart;
         }
         
         public void CreateOrder(Order order)
         {
             order.OrderTime = DateTime.Now;
-            appDbContent.Order.Add(order);
+            _applicationDbContext.Order.Add(order);
 
             var items = shopCart.ListShopItems; // no items?
             
@@ -29,10 +29,10 @@ namespace Shop.Data.Repository
                     OrderId = order.Id,
                     Price = el.car.Price
                 };
-                appDbContent.OrderDetail.Add(orderDetail);
+                _applicationDbContext.OrderDetail.Add(orderDetail);
             }
 
-            appDbContent.SaveChanges();
+            _applicationDbContext.SaveChanges();
 
         }
     }

@@ -8,7 +8,7 @@ using Shop.Data;
 
 namespace Shop.Migrations
 {
-    [DbContext(typeof(AppDbContent))]
+    [DbContext(typeof(ApplicationDbContext))]
     partial class AppDbContentModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

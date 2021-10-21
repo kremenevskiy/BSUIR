@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.Extensions.Configuration;
@@ -17,6 +18,7 @@ using Shop.Data.mocks;
 using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 using Microsoft.EntityFrameworkCore;
 using Shop.Data.Repository;
+using Shop.Entities;
 // using Shop.Data.C
 
 // using Shop.Data.interfaces;
@@ -38,15 +40,29 @@ namespace Shop
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AppDbContent>(options =>
+            
+            
+            services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(_confstring.GetConnectionString("DefaultConnection")));
+            
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            {
+                options.SignIn.RequireConfirmedAccount = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireDigit = false;
+            }).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+            services.AddAuthorization();
+            
             services.AddTransient<IAllCars, CarRepository>();
             services.AddTransient<ICarsCategory, CategoryRepository>();
             services.AddTransient<IAllOrders, OrdersRepository>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped(sp => ShopCart.GetCart(sp));
-            
+            services.AddControllersWithViews();
+            services.AddRazorPages();
             services.AddMvc();
             services.AddMvc(options => options.EnableEndpointRouting = false); // хзхзхз без этого не запускалось
             services.AddMemoryCache();
@@ -73,7 +89,7 @@ namespace Shop
             
             using (var scope = app.ApplicationServices.CreateScope())
             {
-                var content = scope.ServiceProvider.GetRequiredService<AppDbContent>();
+                var content = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
                 DbObjects.Initial(content);
             }
             

@@ -8,16 +8,16 @@ namespace Shop.Data.Repository
     public class CarRepository : IAllCars
     {
 
-        private readonly AppDbContent appDbContent;
+        private readonly ApplicationDbContext _applicationDbContext;
 
-        public CarRepository(AppDbContent appDbContent)
+        public CarRepository(ApplicationDbContext applicationDbContext)
         {
-            this.appDbContent = appDbContent;
+            this._applicationDbContext = applicationDbContext;
         }
 
-        public IEnumerable<Car> Cars => appDbContent.Car.Include(c => c.Category);
-        public IEnumerable<Car> GetFavouriteCars => appDbContent.Car.Where(p => p.IsFavourite).Include(c => c.Category);
-        public Car GetObjectCar(int carId) => appDbContent.Car.FirstOrDefault(p => p.Id == carId);
+        public IEnumerable<Car> Cars => _applicationDbContext.Car.Include(c => c.Category);
+        public IEnumerable<Car> GetFavouriteCars => _applicationDbContext.Car.Where(p => p.IsFavourite).Include(c => c.Category);
+        public Car GetObjectCar(int carId) => _applicationDbContext.Car.FirstOrDefault(p => p.Id == carId);
 
     }
 }

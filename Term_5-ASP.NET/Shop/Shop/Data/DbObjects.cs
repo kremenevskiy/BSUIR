@@ -9,19 +9,19 @@ namespace Shop.Data
 {
     public class DbObjects
     {
-        public static void Initial(AppDbContent content)
+        public static void Initial(ApplicationDbContext context)
         {
             
             
 
-            if (!content.Category.Any())
+            if (!context.Category.Any())
             {
-                content.Category.AddRange(Categories.Select(c => c.Value));
+                context.Category.AddRange(Categories.Select(c => c.Value));
             }
 
-            if (!content.Car.Any())
+            if (!context.Car.Any())
             {
-                content.AddRange(
+                context.AddRange(
                     
                     new Car
                     {
@@ -70,7 +70,7 @@ namespace Shop.Data
                 );
             }
 
-            content.SaveChanges();
+            context.SaveChanges();
         }
 
         private static Dictionary<string, Category> category;

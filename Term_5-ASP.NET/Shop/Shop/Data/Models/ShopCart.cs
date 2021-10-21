@@ -11,11 +11,11 @@ namespace Shop.Data.Models
 {
     public class ShopCart
     {
-        private AppDbContent appDbContent;
+        private ApplicationDbContext _applicationDbContext;
 
-        public ShopCart(AppDbContent appDbContent)
+        public ShopCart(ApplicationDbContext applicationDbContext)
         {
-            this.appDbContent = appDbContent;
+            this._applicationDbContext = applicationDbContext;
         }
         
         public string ShopCartId { get; set; }
@@ -24,7 +24,7 @@ namespace Shop.Data.Models
         public static ShopCart GetCart(IServiceProvider services)
         {
             ISession session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
-            var context = services.GetService<AppDbContent>();
+            var context = services.GetService<ApplicationDbContext>();
             string shopCartId = session.GetString("CartId") ?? Guid.NewGuid().ToString();
             
             session.SetString("CartId", shopCartId);
@@ -36,19 +36,19 @@ namespace Shop.Data.Models
 
         public void AddToCart(Car car)
         {
-            this.appDbContent.ShopCartItems.Add(new ShopCartItem
+            this._applicationDbContext.ShopCartItems.Add(new ShopCartItem
             {
                 ShopCartId = this.ShopCartId,
                 car = car,
                 price = car.Price
             });
 
-            appDbContent.SaveChanges();
+            _applicationDbContext.SaveChanges();
         }
 
         public List<ShopCartItem> GetShopItems()
         {
-            return appDbContent.ShopCartItems.Where(c => c.ShopCartId == ShopCartId).Include(s => s.car).ToList();
+            return _applicationDbContext.ShopCartItems.Where(c => c.ShopCartId == ShopCartId).Include(s => s.car).ToList();
         }
     }
 }

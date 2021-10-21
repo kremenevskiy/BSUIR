@@ -9,7 +9,7 @@ using Shop.Data;
 
 namespace Shop.Migrations
 {
-    [DbContext(typeof(AppDbContent))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20211020014409_shopCart")]
     partial class shopCart
     {

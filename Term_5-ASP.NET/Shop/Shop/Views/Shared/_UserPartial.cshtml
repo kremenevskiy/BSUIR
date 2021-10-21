@@ -1,0 +1,20 @@
+<div class="dropdown me-auto ml-0 mr-4 nav-color">
+    <div class="dropdown-toggle" id="dropdownMenuButton"
+         data-toggle="dropdown" aria-haspopup="true"
+         aria-expanded="false">
+        <img src="~/img/imposter.png" width="50"
+             alt="User" class="rounded"/>
+    </div>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <div class="dropdown-item-text">
+            <img src="~/img/imposter.png" width="50" alt="User" class="rounded"/>
+            user@mail.ru
+        </div>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" asp-controller="ShopCart" asp-action="Index">My order</a>
+        @* <a class="dropdown-item" asp-area="Identify" asp-page="/Account/Logout" href="#">Log off</a> *@
+        <a class="dropdown-item" href="#">Log off</a>
+    </div>
+</div>
+
+@await Component.InvokeAsync("ShopCart")
