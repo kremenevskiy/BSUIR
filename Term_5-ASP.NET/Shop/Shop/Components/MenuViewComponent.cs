@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Shop.Data.Models;
@@ -11,7 +12,7 @@ namespace Shop.Components
             new MenuItem{ Controller="Cars", Action="List", Text="All Cars"},
             new MenuItem{ Controller="ShopCart", Action="Index", Text="Cart"},
             new MenuItem{ Controller="Lab1", Action="Index", Text="Lab1"},
-            
+            new MenuItem{ Controller="Product", Action="Index", Text="Catalog"},
             new MenuItem{ IsPage=true, Area="Admin", Page="/Index", Text="Administration"}
         };
         

@@ -26,8 +26,22 @@ using Shop.Data.Models;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 3 "/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop/Views/_ViewImports.cshtml"
+using Shop.Models;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 4 "/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop/Views/_ViewImports.cshtml"
+using Shop.Entities;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"a26c89ce10dc84f8b794604a40f39868a45439fc", @"/Views/Shared/Components/Menu/Default.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"05926ca6efb5c3eb0123b3354a037427b89bbef6", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"cda84c39cea7a1322a4da047529b7af7ddd2d1e5", @"/Views/_ViewImports.cshtml")]
     public class Views_Shared_Components_Menu_Default : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<IEnumerable<MenuItem>>
     {
         #line hidden
@@ -70,7 +84,7 @@ using Shop.Data.Models;
 #line hidden
 #nullable disable
             WriteLiteral("    <li class=\"nav-item\">\n    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a26c89ce10dc84f8b794604a40f39868a45439fc3690", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a26c89ce10dc84f8b794604a40f39868a45439fc4046", async() => {
                 WriteLiteral(" ");
 #nullable restore
 #line 7 "/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop/Views/Shared/Components/Menu/Default.cshtml"
@@ -136,7 +150,7 @@ else
 #line hidden
 #nullable disable
             WriteLiteral("    <li class=\"nav-item\">\n    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a26c89ce10dc84f8b794604a40f39868a45439fc7088", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a26c89ce10dc84f8b794604a40f39868a45439fc7444", async() => {
                 WriteLiteral("\n        ");
 #nullable restore
 #line 17 "/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop/Views/Shared/Components/Menu/Default.cshtml"

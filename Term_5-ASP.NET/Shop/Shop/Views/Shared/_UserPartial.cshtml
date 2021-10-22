@@ -1,20 +1,77 @@
-<div class="dropdown me-auto ml-0 mr-4 nav-color">
-    <div class="dropdown-toggle" id="dropdownMenuButton"
-         data-toggle="dropdown" aria-haspopup="true"
-         aria-expanded="false">
-        <img src="~/img/imposter.png" width="50"
-             alt="User" class="rounded"/>
-    </div>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <div class="dropdown-item-text">
-            <img src="~/img/imposter.png" width="50" alt="User" class="rounded"/>
-            user@mail.ru
-        </div>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" asp-controller="ShopCart" asp-action="Index">My order</a>
-        @* <a class="dropdown-item" asp-area="Identify" asp-page="/Account/Logout" href="#">Log off</a> *@
-        <a class="dropdown-item" href="#">Log off</a>
-    </div>
-</div>
+@using Microsoft.AspNetCore.Identity;
+@using Shop.Entities;
+@inject SignInManager<ApplicationUser> signInManager;
 
-@await Component.InvokeAsync("ShopCart")
+@* <div class="dropdown me-auto ml-0 mr-4 nav-color"> *@
+@*     <div class="dropdown-toggle" id="dropdownMenuButton" *@
+@*          data-toggle="dropdown" aria-haspopup="true" *@
+@*          aria-expanded="false"> *@
+@*         <img src="~/img/imposter.png" width="50" *@
+@*              alt="User" class="rounded"/> *@
+@*     </div> *@
+@*     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> *@
+@*         <div class="dropdown-item-text"> *@
+@*             <img src="~/img/imposter.png" width="50" alt="User" class="rounded"/> *@
+@*             user@mail.ru *@
+@*         </div> *@
+@*         <div class="dropdown-divider"></div> *@
+@*         <a class="dropdown-item" asp-controller="ShopCart" asp-action="Index">My order</a> *@
+@*         $1$ <a class="dropdown-item" asp-area="Identify" asp-page="/Account/Logout" href="#">Log off</a> #1# *@
+@*         <a class="dropdown-item" href="#">Log off</a> *@
+@*     </div> *@
+@* </div> *@
+@* *@
+@* @await Component.InvokeAsync("ShopCart") *@
+
+
+@if (signInManager.IsSignedIn(User))
+{
+    
+    <div class="dropdown me-auto ml-0 mr-4 nav-color">
+        <div class="dropdown-toggle" id="dropdownMenuButton"
+             data-toggle="dropdown" aria-haspopup="true"
+             aria-expanded="false">
+            <img img-action="GetAvatar"
+                 img-controller="Image"
+                 width="30" alt="User"
+                 class="rounded bg-light" />
+        </div>
+        <div class="dropdown-menu"
+             aria-labelledby="dropdownMenuButton">
+            <div class="dropdown-item-text">
+                <img img-action="GetAvatar"
+                     img-controller="Image"
+                     width="30" alt="User"
+                     class="rounded bg-light" />
+                @User.Identity.Name
+            </div>
+            <div class="dropdown-divider"></div>
+            @* <a class="dropdown-item" asp-controller="Product" asp-action="UserProducts">Мои товары</a> *@
+            <a class="dropdown-item" asp-controller="ShopCart" asp-action="Index">My order</a> 
+            <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnurl="@ViewContext.HttpContext.Request.Path">
+                <input type="submit" value="Log off" class="dropdown-item" />
+            </form>
+        </div>
+    </div>
+    
+    @await Component.InvokeAsync("ShopCart")
+}
+else
+{
+    <ul class="nav navbar-nav ml-auto">
+        <li>
+            <a class="nav-item nav-link"
+               asp-area="Identity"
+               asp-page="/Account/Login">
+                Sign In
+            </a>
+        </li>
+        <li>
+            <a class="nav-item nav-link"
+               asp-area="Identity"
+               asp-page="/Account/Register">
+                Register
+            </a>
+        </li>
+    </ul>
+}

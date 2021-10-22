@@ -1,0 +1,97 @@
+@model ListViewModel<Shop.Entities.Car>
+
+@{
+    ViewData["Title"] = "CarsMenu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var categories = ViewData["Groups"] as IEnumerable<CarGroup>;
+    int currentGroup = (int)ViewData["CurrentGroup"];
+    var text = currentGroup !=0 ? categories
+        .FirstOrDefault(g => g.CarGroupId == currentGroup)?
+        .GroupName : "Все";
+}
+
+<div class="row">
+    <div class="col-2">
+        <div class="dropdown mt-2">
+            <a class="btn btn-secondary dropdown-toggle"
+               asp-action="Index" asp-controller="Product" role="button"
+               id="dropdownMenuLink" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false"> @text
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" asp-action="Index" asp-controller="Product">All</a>
+                @foreach (var item in categories)
+                {
+                    <a class="dropdown-item" asp-action="Index" asp-controller="Product"
+                       asp-route-group="@item.CarGroupId" asp-route-pageNo="1">@item.GroupName</a>}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-10">
+    <div class="card-deck" id="list">
+        <partial name="_ListPartial" model="@Model" />
+    </div>
+    
+    <pager page-current="@Model.CurrentPage" page-total="@Model.TotalPages"
+    action="Index" controller="Product" group-id="@currentGroup"></pager>
+</div>
+
+
+
+
+
+
+@* <h1>Index</h1> *@
+@* *@
+@* <p> *@
+@*     $1$ <a asp-action="Create">Create New</a> #1# *@
+@* </p> *@
+@* <table class="table"> *@
+@*     <thead> *@
+@*         <tr> *@
+@*             <th> *@
+@*                 @Html.DisplayNameFor(model => model.CarName) *@
+@*             </th> *@
+@*             <th> *@
+@*                 @Html.DisplayNameFor(model => model.Description) *@
+@*             </th> *@
+@*             <th> *@
+@*                 @Html.DisplayNameFor(model => model.Image) *@
+@*             </th> *@
+@*             <th> *@
+@*                 @Html.DisplayNameFor(model => model.Price) *@
+@*             </th> *@
+@*             <th> *@
+@*                 @Html.DisplayNameFor(model => model.CarGroupId) *@
+@*             </th> *@
+@*             <th></th> *@
+@*         </tr> *@
+@*     </thead> *@
+@*     <tbody> *@
+@* @foreach (var item in Model) { *@
+@*         <tr> *@
+@*             <td> *@
+@*                 @Html.DisplayFor(modelItem => item.CarName) *@
+@*             </td> *@
+@*             <td> *@
+@*                 @Html.DisplayFor(modelItem => item.Description) *@
+@*             </td> *@
+@*             <td> *@
+@*                 @Html.DisplayFor(modelItem => item.Image) *@
+@*             </td> *@
+@*             <td> *@
+@*                 @Html.DisplayFor(modelItem => item.Price) *@
+@*             </td> *@
+@*             <td> *@
+@*                 @Html.DisplayFor(modelItem => item.CarGroup.CarGroupId) *@
+@*             </td> *@
+@*             <td> *@
+@*                 $1$ <a asp-action="Edit" asp-route-id="@item.CarId">Edit</a> | #1# *@
+@*                 $1$ <a asp-action="Details" asp-route-id="@item.CarId">Details</a> | #1# *@
+@*                 $1$ <a asp-action="Delete" asp-route-id="@item.CarId">Delete</a> #1# *@
+@*             </td> *@
+@*         </tr> *@
+@* } *@
+@*     </tbody> *@
+@* </table> *@
