@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Shop.Data;
 using Shop.Entities;
 using Shop.Extensions;
@@ -14,11 +15,11 @@ namespace Shop.Controllers
         ApplicationDbContext _context;
         int _pageSize;
         
+        
         public ProductController(ApplicationDbContext context)
         {
             _context = context;
             _pageSize = 3;
-            
         }
         
         [Route("Catalog")] [Route("Catalog/Page_{pageNo}")]

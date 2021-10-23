@@ -7,7 +7,7 @@
     int currentGroup = (int)ViewData["CurrentGroup"];
     var text = currentGroup !=0 ? categories
         .FirstOrDefault(g => g.CarGroupId == currentGroup)?
-        .GroupName : "Все";
+        .GroupName : "All";
 }
 
 <div class="row">

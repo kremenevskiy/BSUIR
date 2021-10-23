@@ -1,0 +1,12 @@
+@model Cart
+<a asp-controller="Cart"
+   asp-action="Index"
+   class="d-flex mr-3">
+    
+    <i class="fas fa-shopping-cart nav-color"></i>
+    <div class="card-text badge badge-secondary">(@Model.Count)</div>
+
+</a>
+<div class="card-text badge badge-secondary">
+    @Model.TotalPrice $
+</div>

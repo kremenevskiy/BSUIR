@@ -1,0 +1,69 @@
+@page
+@model Shop.Areas.Admin.Pages.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create" class="btn btn-outline-info">
+        <span class="fa fa-plus-circle"> Add</span>
+    </a>
+    
+</p>
+<table class="table">
+    <thead>
+    <tr>
+        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.Car[0].CarName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Car[0].Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Car[0].Image)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Car[0].Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Car[0].CarGroup)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Car) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CarName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+               <img src="~/img/@item.Image" alt="NoImage" width="50" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CarGroup.CarGroupId)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.CarId" class="btn btn-outline-info">
+                    <span class="fas fa-edit"></span>
+                </a>
+                
+                <a asp-page="./Delete" asp-route-id="@item.CarId" class="btn btn-outline-danger">
+                    <span class="fas fa-trash-alt"></span>
+                </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

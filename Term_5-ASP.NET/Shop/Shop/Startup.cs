@@ -19,8 +19,13 @@ using Shop.Data.Models;
 using Shop.Data.mocks;
 using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Shop.Data.Repository;
 using Shop.Entities;
+using Shop.Extensions;
+// using Shop.Extensions;
+using Shop.Models;
+using Shop.Services;
 
 // using Shop.Data.C
 
@@ -56,17 +61,21 @@ namespace Shop
             }).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
             services.AddAuthorization();
             services.AddControllersWithViews();
+            
             services.AddRazorPages();
             services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = $"/Identity/Account/Login";
                 options.LogoutPath = $"/Identity/Account/Logout";
             });
+            
+            services.AddDistributedMemoryCache();
             services.AddSession(opt =>
             {
                 opt.Cookie.HttpOnly = true;
                 opt.Cookie.IsEssential = true;
             });
+            
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             
             services.AddTransient<IAllCars, CarRepository>();
@@ -75,6 +84,7 @@ namespace Shop
 
            
             services.AddScoped(sp => ShopCart.GetCart(sp));
+            services.AddScoped<Cart>(sp=>CartService.GetCart(sp));
             
             // services.AddMvc();
             // services.AddMvc(options => options.EnableEndpointRouting = false); // хзхзхз без этого не запускалось
@@ -88,8 +98,11 @@ namespace Shop
                                 IWebHostEnvironment env,
                                 ApplicationDbContext context,
                                 UserManager<ApplicationUser> userManager,
-                                RoleManager<IdentityRole> roleManager)
+                                RoleManager<IdentityRole> roleManager,
+                                ILoggerFactory logger)
         {
+            logger.AddFile("Logs/log-{Date}.txt");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -98,7 +111,7 @@ namespace Shop
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseSession();
+            
             // app.UseMvc(routes =>
             // {
             //     routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
@@ -113,6 +126,7 @@ namespace Shop
             
             app.UseRouting();
             app.UseAuthentication();
+            app.UseSession();
             app.UseAuthorization();
             // app.UseMvcWithDefaultRoute(); // default index.html if no url with controller and view
             
@@ -123,6 +137,7 @@ namespace Shop
             //     var content = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
             //     DbObjects.Initial(content);
             // }
+            app.UseFileLogging();
             
             
             DbInitializer.Seed(context, userManager, roleManager).Wait();

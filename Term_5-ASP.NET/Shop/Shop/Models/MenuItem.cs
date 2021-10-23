@@ -1,4 +1,4 @@
-namespace Shop.Data.Models
+namespace Shop.Models
 {
     public class MenuItem
     {
