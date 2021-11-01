@@ -51,10 +51,11 @@
             android:layout_height="40dp"
             android:layout_marginStart="10dp"
             android:background="@drawable/button_background"
-            android:onClick="rightParentBTNPush"
-            android:text="@string/parenthesesOpenText"
+            android:onClick="exponentBTNPush"
+            android:text="@string/exponent"
+            android:textAllCaps="false"
             android:textColor="@color/tanAccent"
-            android:textSize="28sp"
+            android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@+id/button4"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -242,10 +243,11 @@
             android:layout_height="40dp"
             android:layout_marginStart="10dp"
             android:background="@drawable/button_background"
-            android:onClick="leftParentBTNPush"
-            android:text="@string/parenthesesCloseText"
+            android:onClick="fibonacciBTNPush"
+            android:text="@string/Fibonacci"
+            android:textAllCaps="false"
             android:textColor="@color/tanAccent"
-            android:textSize="28sp"
+            android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@+id/button18"
             app:layout_constraintTop_toTopOf="parent" />
 

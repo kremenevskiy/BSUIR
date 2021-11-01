@@ -13,20 +13,16 @@ import android.widget.Toast
 import androidx.core.content.contentValuesOf
 import com.example.calculator.databinding.ActivityMainBinding
 
-import org.mariuszgromada.math.mxparser.*;
+import org.mariuszgromada.math.mxparser.*
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var bind: ActivityMainBinding
 
-    var display : TextView? = null;
-    var previousCalculations : EditText? = null;
-
     lateinit var buttonLandscape: Button
     lateinit var buttonPortrait: Button
 
-
-    class ParseInput(){
+    class ParseInput {
         var displayText: String = "0"
         var storedText: String = ""
 
@@ -106,7 +102,7 @@ class MainActivity : AppCompatActivity() {
             }
             else if (storedText == "") {
                 storedText = displayText + operator
-                displayText = "0"
+//                displayText = "0"
                 operator_last = true
             }
             else {
@@ -202,7 +198,12 @@ class MainActivity : AppCompatActivity() {
 
         var equalPress = false
         fun equalPressed() {
+
+            if (equalPress) {
+                return
+            }
             equalPress = true
+
 
             if (!powerOfYPressed) {
                 storedText += displayText
@@ -282,23 +283,14 @@ class MainActivity : AppCompatActivity() {
     var parsing = ParseInput()
 
 
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
-
-
 
         super.onCreate(savedInstanceState)
         bind = ActivityMainBinding.inflate(layoutInflater)
         val view = bind.root
         setContentView(view)
-
-
-
-        bind.displayEditText.setText("0")
-
-
+        bind.previousCalculationView.setText("")
+        bind.displayEditText.text = "0"
 
 
         bind.buttonSetLandscape?.setOnClickListener {
@@ -312,117 +304,119 @@ class MainActivity : AppCompatActivity() {
 
 //        setContentView(R.layout.activity_main)
 
-//        display = findViewById<TextView>(R.id.displayEditText);
-//        bind.displayEditText.setText("3w424");
+//        display = findViewById<TextView>(R.id.textViewEditable);
+//        bind.textViewEditable.setText("3w424");
 //        previousCalculations = Text
 
-        bind.displayEditText.showSoftInputOnFocus = false
+//        bind.textViewEditable.showSoftInputOnFocus = false
 
     }
 
     private fun updateText(strToAdd : String){
 //        display?.setText(strToAdd);
-//        bind.displayEditText.setText(strToAdd)
+//        bind.textViewEditable.setText(strToAdd)
 
         val oldStr = bind.displayEditText.text
-        val cursorPos = bind.displayEditText.selectionStart;
+        val cursorPos = bind.displayEditText.selectionStart
 
         val leftStr = oldStr.substring(0, cursorPos)
         val rightStr = oldStr.substring(cursorPos)
 
-        bind.displayEditText.setText(String.format("%s%s%s", leftStr, strToAdd, rightStr))
-        bind.displayEditText.setSelection(cursorPos + strToAdd.length)
+        bind.displayEditText.text = String.format("%s%s%s", leftStr, strToAdd, rightStr)
+
     }
 
-    public fun zeroBTNPush(view : View){
+    fun zeroBTNPush(view : View){
         parsing.addNum("0")
-        bind.displayEditText.setText(parsing.getInput())
+        bind.displayEditText.text = parsing.getInput()
     }
-    public fun oneBTNPush(view : View){
+    fun oneBTNPush(view : View){
         parsing.addNum("1")
-        bind.displayEditText.setText(parsing.getInput())
+        bind.displayEditText.text = parsing.getInput()
     }
-    public fun twoBTNPush(view : View){
+    fun twoBTNPush(view : View){
         parsing.addNum("2")
-        bind.displayEditText.setText(parsing.getInput())
+        bind.displayEditText.text = parsing.getInput()
     }
-    public fun threeBTNPush(view : View){
+    fun threeBTNPush(view : View){
         parsing.addNum("3")
-        bind.displayEditText.setText(parsing.getInput())
+        bind.displayEditText.text = parsing.getInput()
     }
-    public fun fourBTNPush(view : View){
+    fun fourBTNPush(view : View){
         parsing.addNum("4")
-        bind.displayEditText.setText(parsing.getInput())
+        bind.displayEditText.text = parsing.getInput()
     }
-    public fun fiveBTNPush(view : View){
+    fun fiveBTNPush(view : View){
         parsing.addNum("5")
-        bind.displayEditText.setText(parsing.getInput())
+        bind.displayEditText.text = parsing.getInput()
     }
-    public fun sixBTNPush(view : View){
+    fun sixBTNPush(view : View){
         parsing.addNum("6")
-        bind.displayEditText.setText(parsing.getInput())
+        bind.displayEditText.text = parsing.getInput()
     }
-    public fun sevenBTNPush(view : View){
+    fun sevenBTNPush(view : View){
         parsing.addNum("7")
-        bind.displayEditText.setText(parsing.getInput())
+        bind.displayEditText.text = parsing.getInput()
     }
-    public fun eightBTNPush(view : View){
+    fun eightBTNPush(view : View){
         parsing.addNum("8")
-        bind.displayEditText.setText(parsing.getInput())
+        bind.displayEditText.text = parsing.getInput()
     }
-    public fun nineBTNPush(view : View){
+    fun nineBTNPush(view : View){
         parsing.addNum("9")
-        bind.displayEditText.setText(parsing.getInput())
+        bind.displayEditText.text = parsing.getInput()
     }
-    public fun addBTNPush(view : View){
+    fun addBTNPush(view : View){
         parsing.operatorPressed("+")
-        bind.displayEditText.setText(parsing.getInput())
+        bind.displayEditText.text = parsing.getInput()
     }
-    public fun subtractBTNPush(view : View){
+    fun subtractBTNPush(view : View){
         parsing.operatorPressed("-")
-        bind.displayEditText.setText(parsing.getInput())
+        bind.displayEditText.text = parsing.getInput()
     }
-    public fun multiplyBTNPush(view : View){
+    fun multiplyBTNPush(view : View){
         parsing.operatorPressed("*")
-        bind.displayEditText.setText(parsing.getInput())
+        bind.displayEditText.text = parsing.getInput()
     }
-    public fun divBTNPush(view : View){
+    fun divBTNPush(view : View){
         parsing.operatorPressed("/")
-        bind.displayEditText.setText(parsing.getInput())
+        bind.displayEditText.text = parsing.getInput()
     }
-    public fun dotBTNPush(view : View){
+    fun dotBTNPush(view : View){
         parsing.addNum(".")
-        bind.displayEditText.setText(parsing.getInput())
+        bind.displayEditText.text = parsing.getInput()
     }
-    public fun rightParentBTNPush(view : View){
-        updateText(resources.getString(R.string.parenthesesOpenText));
+    fun fibonacciBTNPush(view : View){
+        parsing.scientificPressed("Fib(")
+        bind.displayEditText.text = parsing.getInput()
     }
-    public fun leftParentBTNPush(view : View){
-        updateText(resources.getString(R.string.parenthesesCloseText));
+    fun exponentBTNPush(view : View){
+        parsing.scientificPressed("exp(")
+        bind.displayEditText.text = parsing.getInput()
     }
-    public fun clearBTNPush(view : View){
+    fun clearBTNPush(view : View){
         parsing.clearPressed()
-        bind.displayEditText.setText(parsing.getInput())
-        bind.previousCalculationView.setText("")
+        bind.displayEditText.text = parsing.getInput()
+        bind.previousCalculationView.text = ""
     }
-    public fun backspaceBTNPush(view : View){
+    fun backspaceBTNPush(view : View){
         parsing.removeLast()
-        bind.displayEditText.setText(parsing.getInput())
-//        val cursorPos = bind.displayEditText.selectionStart;
-//        val textLen = bind.displayEditText.text.length
+        bind.displayEditText.text = parsing.getInput()
+//        val cursorPos = bind.textViewEditable.selectionStart;
+//        val textLen = bind.textViewEditable.text.length
 
 //        if (cursorPos != 0 && textLen != 0 ) {
 //
-//            val selection = bind.displayEditText.text as SpannableStringBuilder;
+//            val selection = bind.textViewEditable.text as SpannableStringBuilder;
 //            selection.replace(cursorPos-1, cursorPos, "")
-//            bind.displayEditText.text = selection;
-//            bind.displayEditText.setSelection(cursorPos-1)
+//            bind.textViewEditable.text = selection;
+//            bind.textViewEditable.setSelection(cursorPos-1)
 //        }
     }
-    public fun equalBTNPush(view : View){
+    fun equalBTNPush(view : View){
         parsing.equalPressed()
-        bind.displayEditText.setText(parsing.displayText)
-//        var userExpr = bind.displayEditText.text.toString()
+        bind.displayEditText.text = parsing.displayText
+//        var userExpr = bind.textViewEditable.text.toString()
 //
 //        bind.previousCalculationView.text = userExpr
 //
@@ -431,69 +425,68 @@ class MainActivity : AppCompatActivity() {
 //
 //        val exp = Expression(userExpr)
 //        val result = exp.calculate().toString()
-//        bind.displayEditText.setText(result)
-//        bind.displayEditText.setSelection(result.length)
+//        bind.textViewEditable.setText(result)
+//        bind.textViewEditable.setSelection(result.length)
     }
 
-    public fun trigSinBTNPush(view : View){
+    fun trigSinBTNPush(view : View){
         parsing.scientificPressed("sin(")
-        bind.displayEditText.setText(parsing.getInput())
+        bind.displayEditText.text = parsing.getInput()
     }
-    public fun trigCosBTNPush(view : View){
+    fun trigCosBTNPush(view : View){
         parsing.scientificPressed("cos(")
-        bind.displayEditText.setText(parsing.getInput())
+        bind.displayEditText.text = parsing.getInput()
     }
-    public fun trigTanBTNPush(view : View){
+    fun trigTanBTNPush(view : View){
         parsing.scientificPressed("tan(")
-        bind.displayEditText.setText(parsing.getInput())
+        bind.displayEditText.text = parsing.getInput()
     }
-    public fun trigArcSinBTNPush(view : View){
+    fun trigArcSinBTNPush(view : View){
         parsing.scientificPressed("arcsin(")
-        bind.displayEditText.setText(parsing.getInput())
+        bind.displayEditText.text = parsing.getInput()
     }
-    public fun trigArcCosBTNPush(view : View){
+    fun trigArcCosBTNPush(view : View){
         parsing.scientificPressed("arccos(")
-        bind.displayEditText.setText(parsing.getInput())
+        bind.displayEditText.text = parsing.getInput()
     }
-    public fun trigArcTanBTNPush(view : View){
+    fun trigArcTanBTNPush(view : View){
         parsing.scientificPressed("arctan(")
-        bind.displayEditText.setText(parsing.getInput())
+        bind.displayEditText.text = parsing.getInput()
     }
-    public fun logBTNPush(view : View){
+    fun logBTNPush(view : View){
         parsing.scientificPressed("log2(")
-        bind.displayEditText.setText(parsing.getInput())
+        bind.displayEditText.text = parsing.getInput()
     }
-    public fun naturalLogBTNPush(view : View){
+    fun naturalLogBTNPush(view : View){
         parsing.scientificPressed("ln(")
-        bind.displayEditText.setText(parsing.getInput())
+        bind.displayEditText.text = parsing.getInput()
     }
-    public fun squareRootTNPush(view : View){
+    fun squareRootTNPush(view : View){
         parsing.scientificPressed("sqrt(")
-        bind.displayEditText.setText(parsing.getInput())
+        bind.displayEditText.text = parsing.getInput()
     }
-    public fun eBTNPush(view : View){
+    fun eBTNPush(view : View){
         parsing.extraStaffPressed("e")
-        bind.displayEditText.setText(parsing.getInput())
+        bind.displayEditText.text = parsing.getInput()
     }
-    public fun piBTNPush(view : View){
+    fun piBTNPush(view : View){
         parsing.extraStaffPressed("pi")
-        bind.displayEditText.setText(parsing.getInput())
+        bind.displayEditText.text = parsing.getInput()
     }
-    public fun absoluteValueBTNPush(view : View){
+    fun absoluteValueBTNPush(view : View){
         parsing.scientificPressed("abs(")
-        bind.displayEditText.setText(parsing.getInput())
+        bind.displayEditText.text = parsing.getInput()
     }
-    public fun isPrimeBTNPush(view : View){
+    fun isPrimeBTNPush(view : View){
         parsing.scientificPressed("ispr(")
-        bind.displayEditText.setText(parsing.getInput())
+        bind.displayEditText.text = parsing.getInput()
     }
-    public fun xSquaredBTNPush(view : View){
+    fun xSquaredBTNPush(view : View){
         parsing.extraStaffPressed("^(2)")
-        bind.displayEditText.setText(parsing.getInput())
+        bind.displayEditText.text = parsing.getInput()
     }
-    public fun xPowerYBTNPush(view : View){
+    fun xPowerYBTNPush(view : View){
         parsing.extraStaffPressed("^(")
-        bind.displayEditText.setText(parsing.getInput())
+        bind.displayEditText.text = parsing.getInput()
     }
 }
-

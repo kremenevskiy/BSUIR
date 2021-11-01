@@ -34,7 +34,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <TextView
         android:id="@+id/displayEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -43,7 +43,6 @@
         android:paddingEnd="10dp"
         android:ems="10"
         android:textAlignment="textEnd"
-        android:inputType="textPersonName"
         android:hint="@string/displayHint"
         android:textColorHint="@color/greyAccent"
         android:textSize="48sp"
@@ -100,9 +99,10 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/button_background"
             android:onClick="rightParentBTNPush"
-            android:text="@string/parenthesesOpenText"
+            android:textAllCaps="false"
+            android:text="@string/exponent"
             android:textColor="@color/tanAccent"
-            android:textSize="28sp"
+            android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@+id/button4"
             app:layout_constraintTop_toBottomOf="@+id/button3" />
 
@@ -293,9 +293,10 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/button_background"
             android:onClick="leftParentBTNPush"
-            android:text="@string/parenthesesCloseText"
+            android:text="@string/Fibonacci"
+            android:textAllCaps="false"
             android:textColor="@color/tanAccent"
-            android:textSize="28sp"
+            android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@+id/button18"
             app:layout_constraintTop_toBottomOf="@+id/button3" />
 
