@@ -1,35 +1,21 @@
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Security.Cryptography.Xml;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
-
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Shop.Data;
 using Shop.Data.Models;
-using Shop.Data.mocks;
-using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Shop.Data.Repository;
 using Shop.Entities;
 using Shop.Extensions;
-// using Shop.Extensions;
 using Shop.Models;
 using Shop.Services;
 
-// using Shop.Data.C
-
-// using Shop.Data.interfaces;
 
 namespace Shop
 {
@@ -42,11 +28,16 @@ namespace Shop
             Configuration = configuration;
         }         
         
+        
+
+        
+        
+        
+       
+        
         public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
-            
-            
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             
@@ -59,6 +50,7 @@ namespace Shop
                 options.Password.RequireUppercase = false;
                 options.Password.RequireDigit = false;
             }).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+            
             services.AddAuthorization();
             services.AddControllersWithViews();
             
@@ -118,19 +110,14 @@ namespace Shop
             //     routes.MapRoute(name: "categoryFilter", template: "Car/{action}/{carType?}",
             //         defaults: new {Controller = "Car", action = "List"});
             // });
-        
-           
-           
+            
             app.UseStatusCodePages();
-            
-            
+
             app.UseRouting();
             app.UseAuthentication();
             app.UseSession();
             app.UseAuthorization();
             // app.UseMvcWithDefaultRoute(); // default index.html if no url with controller and view
-            
-            
             
             // using (var scope = app.ApplicationServices.CreateScope())
             // {
@@ -138,8 +125,7 @@ namespace Shop
             //     DbObjects.Initial(content);
             // }
             app.UseFileLogging();
-            
-            
+
             DbInitializer.Seed(context, userManager, roleManager).Wait();
             app.UseEndpoints(endpoints =>
             {
@@ -150,5 +136,6 @@ namespace Shop
                 endpoints.MapRazorPages();
             });
         }
+        
     }
 }

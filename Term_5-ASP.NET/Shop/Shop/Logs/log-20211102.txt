@@ -1,0 +1,8 @@
+2021-11-02T12:21:13.1753640+03:00  [INF] Now listening on: "https://localhost:5001" (d826f4b8)
+2021-11-02T12:21:13.1800920+03:00  [INF] Now listening on: "http://localhost:5000" (d826f4b8)
+2021-11-02T12:21:13.1802480+03:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2021-11-02T12:21:13.1802690+03:00  [INF] Hosting environment: "Development" (c3307c92)
+2021-11-02T12:21:13.1802800+03:00  [INF] Content root path: "/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop" (b5d60022)
+2021-11-02T12:21:26.4603940+03:00  [INF] Request /favicon.ico returns status code 404 (79fdf928)
+2021-11-02T12:21:45.0245640+03:00  [INF] User logged in. (fdce0db4)
+2021-11-02T12:21:45.0251390+03:00  [INF] Request /Identity/Account/Login returns status code 302 (58250cbb)

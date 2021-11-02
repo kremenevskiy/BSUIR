@@ -17,11 +17,8 @@ namespace Shop.Services
         
         public static Cart GetCart(IServiceProvider sp)
         {
-            
             var session = sp.GetRequiredService<IHttpContextAccessor>().HttpContext.Session;
-            // получить CartService из сессии
-            // или создать новый для возможности тестирования
-            var cart = session?.Get<CartService>("cart") ?? new CartService();
+            var cart = session.Get<CartService>("cart") ?? new CartService();
             cart.Session = session;
             return cart;
         }
@@ -29,17 +26,18 @@ namespace Shop.Services
         public override void AddToCart(Car car)
         {
             base.AddToCart(car);
-            Session?.Set<CartService>(sessionKey, this); 
+            Session?.Set(sessionKey, this); 
         }
         public override void RemoveFromCart(int id)
         {
             base.RemoveFromCart(id);
-            Session?.Set<CartService>(sessionKey, this); 
+            Session?.Set(sessionKey, this); 
         }
-        public override void ClearAll()
+
+        protected override void ClearAll()
         {
             base.ClearAll();
-            Session?.Set<CartService>(sessionKey, this); 
+            Session?.Set(sessionKey, this); 
         }
     }
 }

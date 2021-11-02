@@ -6,11 +6,8 @@ namespace Shop.Models
 {
     public class Cart
     {
-        public Dictionary<int, CartItem> Items { get; set; }
-        public Cart()
-        {
-            Items = new Dictionary<int, CartItem>();
-        }
+        public Dictionary<int, CartItem> Items { get; set; } = new Dictionary<int, CartItem>();
+        
         public int Count
         {
             get
@@ -27,8 +24,7 @@ namespace Shop.Models
             }
         }
         
-        
-        virtual public void AddToCart(Car car)
+        public virtual void AddToCart(Car car)
         {
             if (Items.ContainsKey(car.CarId))
                 Items[car.CarId].Quantity++;
@@ -39,11 +35,13 @@ namespace Shop.Models
                     Quantity = 1
                 });
         }
-        virtual public void RemoveFromCart(int id)
+        
+        public virtual void RemoveFromCart(int id)
         {
             Items.Remove(id);
         }
-        virtual public void ClearAll()
+
+        protected virtual void ClearAll()
         {
             Items.Clear();
         }
