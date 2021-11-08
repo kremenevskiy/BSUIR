@@ -7,8 +7,8 @@ def producer():
     print(f'Set locking in {threading.current_thread().name}')
 
     with lock:
-        time.sleep(2)
         print(f'locked {threading.current_thread().name}')
+        time.sleep(2)
         sys.stdout.flush()
         # time.sleep(10)  # почему не работает потому что щелкает?
         with lock:

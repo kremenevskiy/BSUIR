@@ -16,9 +16,10 @@ def producer():
         q.append(num)
         cond.notify()
         cond.release()
-        time.sleep(5)
+        time.sleep(1)
         if num == 7:
             break
+        print('working producer')
 
 
 def consumer():
