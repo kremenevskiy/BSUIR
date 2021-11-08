@@ -4,15 +4,22 @@ import queue
 
 
 def task(name, work_queue):
-
+    print('new task...')
     with open('Log_2.txt', 'a') as f:
+        if work_queue.empty():
+            f.write(f'Task {name} have nothing to do(\n')
+            print(f'Task {name} have nothing to do(\n')
         while not work_queue.empty():
             delay = work_queue.get()
             start = time.time()
             # with open('Log.txt', 'a') as f:
             f.write(f'Task {name} started!\n')
+            f.write(f'doing task ... N {name} : t-{delay}\n')
+            print(f'doing task... {name}: t-{delay}')
             time.sleep(delay)
             f.write(f"Task {name} total elapsed time: {time.time() - start:.1f}\n")
+            # print('queue', work_queue)
+            print(bool(work_queue.empty()))
 
 
 def main():
@@ -30,9 +37,10 @@ def main():
 
     tasks = []
 
-    while work_queue.not_empty:
-        i = 0
+    i = 0
+    while not work_queue.empty():
         task(str(i), work_queue)
+        i += 1
 
     with open('Log_2.txt', 'a') as f:
         f.write(f'Time ended: {time.strftime("%H:%M:%S", time.localtime())}')

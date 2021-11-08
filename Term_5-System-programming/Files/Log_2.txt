@@ -1,0 +1,33 @@
+Time now: 15:47:38
+Task 0 started!
+doing task ... N 0 : t-0
+Task 0 total elapsed time: 0.0
+Task 0 started!
+doing task ... N 0 : t-4
+Task 0 total elapsed time: 4.0
+Task 0 started!
+doing task ... N 0 : t-10
+Task 0 total elapsed time: 10.0
+Task 0 started!
+doing task ... N 0 : t-10
+Task 0 total elapsed time: 10.0
+Task 0 started!
+doing task ... N 0 : t-1
+Task 0 total elapsed time: 1.0
+Task 0 started!
+doing task ... N 0 : t-6
+Task 0 total elapsed time: 6.0
+Task 0 started!
+doing task ... N 0 : t-10
+Task 0 total elapsed time: 10.0
+Task 0 started!
+doing task ... N 0 : t-9
+Task 0 total elapsed time: 9.0
+Task 0 started!
+doing task ... N 0 : t-3
+Task 0 total elapsed time: 3.0
+Task 0 started!
+doing task ... N 0 : t-2
+Task 0 total elapsed time: 2.0
+Time ended: 15:48:33
+Total elapsed time: 55.0
