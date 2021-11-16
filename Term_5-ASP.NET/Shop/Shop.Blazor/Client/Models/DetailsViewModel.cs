@@ -6,8 +6,11 @@ namespace Shop.Blazor.Client.Models
     {
         [JsonPropertyName("carName")]
         public string CarName { get; set; }
+        [JsonPropertyName("description")]
         public string Description { get; set; }
-        public int Price { get; set; } 
+        [JsonPropertyName("price")]
+        public int Price { get; set; }
+        [JsonPropertyName("image")]
         public string Image { get; set; } 
     }
 }

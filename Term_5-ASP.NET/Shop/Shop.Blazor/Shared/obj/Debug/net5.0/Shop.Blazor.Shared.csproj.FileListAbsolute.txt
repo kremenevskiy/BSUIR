@@ -9,4 +9,4 @@
 /Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop.Blazor/Shared/obj/Debug/net5.0/Shop.Blazor.Shared.dll
 /Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop.Blazor/Shared/obj/Debug/net5.0/ref/Shop.Blazor.Shared.dll
 /Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop.Blazor/Shared/obj/Debug/net5.0/Shop.Blazor.Shared.pdb
-/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop.Blazor/Shared/obj/Debug/net5.0/Shop.Blazor.Shared.csproj.AssemblyReference.cache
+/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop.Blazor/Shared/obj/Debug/net5.0/Shop.Blazor.Shared.csprojAssemblyReference.cache

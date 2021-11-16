@@ -14,7 +14,7 @@
         "outputPath": "/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop.Blazor/Shared/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/kremenevskiy/.nuget/NuGet/NuGet.Config"
+          "/Users/kremenevskiy/.config/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -52,7 +52,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/Users/kremenevskiy/.dotnet/sdk/5.0.402/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.402/RuntimeIdentifierGraph.json"
         }
       }
     }

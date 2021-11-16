@@ -871,3 +871,4 @@
 /Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop.Blazor/Client/obj/Debug/net5.0/Shop.Blazor.Client.dll
 /Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop.Blazor/Client/obj/Debug/net5.0/ref/Shop.Blazor.Client.dll
 /Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop.Blazor/Client/obj/Debug/net5.0/Shop.Blazor.Client.pdb
+/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop.Blazor/Client/obj/Debug/net5.0/Shop.Blazor.Client.csprojAssemblyReference.cache

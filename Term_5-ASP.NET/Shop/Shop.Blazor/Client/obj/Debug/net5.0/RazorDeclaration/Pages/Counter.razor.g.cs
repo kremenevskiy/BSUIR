@@ -115,7 +115,7 @@ using System.ComponentModel.DataAnnotations;
     }
     private void IncrementCount()
     {
-        currentCount++;
+        currentCount ++;
     }
     class FormModel
     {
