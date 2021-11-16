@@ -1,0 +1,12 @@
+/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop.Blazor/Shared/bin/Debug/net5.0/Shop.Blazor.Shared.deps.json
+/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop.Blazor/Shared/bin/Debug/net5.0/Shop.Blazor.Shared.dll
+/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop.Blazor/Shared/bin/Debug/net5.0/ref/Shop.Blazor.Shared.dll
+/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop.Blazor/Shared/bin/Debug/net5.0/Shop.Blazor.Shared.pdb
+/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop.Blazor/Shared/obj/Debug/net5.0/Shop.Blazor.Shared.GeneratedMSBuildEditorConfig.editorconfig
+/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop.Blazor/Shared/obj/Debug/net5.0/Shop.Blazor.Shared.AssemblyInfoInputs.cache
+/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop.Blazor/Shared/obj/Debug/net5.0/Shop.Blazor.Shared.AssemblyInfo.cs
+/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop.Blazor/Shared/obj/Debug/net5.0/Shop.Blazor.Shared.csproj.CoreCompileInputs.cache
+/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop.Blazor/Shared/obj/Debug/net5.0/Shop.Blazor.Shared.dll
+/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop.Blazor/Shared/obj/Debug/net5.0/ref/Shop.Blazor.Shared.dll
+/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop.Blazor/Shared/obj/Debug/net5.0/Shop.Blazor.Shared.pdb
+/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop.Blazor/Shared/obj/Debug/net5.0/Shop.Blazor.Shared.csproj.AssemblyReference.cache

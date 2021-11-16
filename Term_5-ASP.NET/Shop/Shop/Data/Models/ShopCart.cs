@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 
-using Microsoft.EntityFrameworkCore;
 
 namespace Shop.Data.Models
 {

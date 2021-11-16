@@ -1,13 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "U8evxrinihngu0mJUV76qFtmyjn33m/Wv2jaEh0z0fFv1pZ0i/awnLp2/sowH3qNwss3paPtF3P1oTbI2nBNbg==",
+  "dgSpecHash": "NaIRBUkVuqxsHys2wd+U10NGvhcTg3ARdFOtDm9r4xrIjBcIA/r/41UFymIE4K0NyvkA8VT3JBkLjpxZXxACXQ==",
   "success": true,
   "projectFilePath": "/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop/Shop.csproj",
   "expectedPackageFiles": [
     "/Users/kremenevskiy/.nuget/packages/bootstrap/5.1.2/bootstrap.5.1.2.nupkg.sha512",
     "/Users/kremenevskiy/.nuget/packages/entityframework/6.4.4/entityframework.6.4.4.nupkg.sha512",
     "/Users/kremenevskiy/.nuget/packages/humanizer.core/2.8.26/humanizer.core.2.8.26.nupkg.sha512",
-    "/Users/kremenevskiy/.nuget/packages/json/1.0.1/json.1.0.1.nupkg.sha512",
     "/Users/kremenevskiy/.nuget/packages/microsoft.aspnetcore.antiforgery/2.2.0/microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",
     "/Users/kremenevskiy/.nuget/packages/microsoft.aspnetcore.authentication/2.2.0/microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
     "/Users/kremenevskiy/.nuget/packages/microsoft.aspnetcore.authentication.abstractions/2.2.0/microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
@@ -206,6 +205,7 @@
     "/Users/kremenevskiy/.nuget/packages/system.text.encoding.codepages/4.7.0/system.text.encoding.codepages.4.7.0.nupkg.sha512",
     "/Users/kremenevskiy/.nuget/packages/system.text.encoding.extensions/4.3.0/system.text.encoding.extensions.4.3.0.nupkg.sha512",
     "/Users/kremenevskiy/.nuget/packages/system.text.encodings.web/4.5.0/system.text.encodings.web.4.5.0.nupkg.sha512",
+    "/Users/kremenevskiy/.nuget/packages/system.text.json/5.0.2/system.text.json.5.0.2.nupkg.sha512",
     "/Users/kremenevskiy/.nuget/packages/system.text.regularexpressions/4.3.0/system.text.regularexpressions.4.3.0.nupkg.sha512",
     "/Users/kremenevskiy/.nuget/packages/system.threading/4.3.0/system.threading.4.3.0.nupkg.sha512",
     "/Users/kremenevskiy/.nuget/packages/system.threading.tasks/4.3.0/system.threading.tasks.4.3.0.nupkg.sha512",
@@ -217,16 +217,5 @@
     "/Users/kremenevskiy/.nuget/packages/system.xml.xmldocument/4.3.0/system.xml.xmldocument.4.3.0.nupkg.sha512",
     "/Users/kremenevskiy/.nuget/packages/system.xml.xmlserializer/4.3.0/system.xml.xmlserializer.4.3.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'JSON 1.0.1' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
-      "libraryId": "JSON",
-      "targetGraphs": [
-        "net5.0"
-      ]
-    }
-  ]
+  "logs": []
 }

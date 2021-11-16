@@ -42,10 +42,6 @@
               "target": "Package",
               "version": "[6.4.4, )"
             },
-            "JSON": {
-              "target": "Package",
-              "version": "[1.0.1, )"
-            },
             "Microsoft.AspNetCore.Authentication": {
               "target": "Package",
               "version": "[2.2.0, )"
@@ -134,6 +130,10 @@
             "Serilog.Extensions.Logging.File": {
               "target": "Package",
               "version": "[2.0.0, )"
+            },
+            "System.Text.Json": {
+              "target": "Package",
+              "version": "[5.0.2, )"
             },
             "bootstrap": {
               "target": "Package",

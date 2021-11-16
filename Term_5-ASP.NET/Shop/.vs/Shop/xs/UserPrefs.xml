@@ -1,12 +1,40 @@
 ﻿<Properties StartupConfiguration="{DA3299CF-23C7-4B36-B37E-6BD1225A5310}|Default">
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Shop.Blazor/Client/Pages/FetchData.razor">
+    <Files>
+      <File FileName="Shop/Extensions/AppExtensions.cs" Line="9" Column="51" />
+      <File FileName="Shop/Shop.csproj" Line="1" Column="1" />
+      <File FileName="Shop.Blazor/Server/Startup.cs" Line="10" Column="1" />
+      <File FileName="Shop.Blazor/Client/Pages/Counter.razor" Line="28" Column="24" />
+      <File FileName="Shop.Blazor/Server/Program.cs" Line="1" Column="1" />
+      <File FileName="Shop.Blazor/Server/appsettings.json" Line="12" Column="22" />
+      <File FileName="Shop.Blazor/Server/Shop.Blazor.Server.csproj" Line="2" Column="1" />
+      <File FileName="Shop/Data/Models/ShopCart.cs" Line="7" Column="1" />
+      <File FileName="Shop/Startup.cs" Line="25" Column="9" />
+      <File FileName="Shop/Views/Cars/List.cshtml" Line="21" Column="14" />
+      <File FileName="Shop.Blazor/Server/CarsController.cs" Line="1" Column="1" />
+      <File FileName="Shop.Blazor/Client/Pages/ApiDemo.razor" Line="17" Column="1" />
+      <File FileName="Shop.Blazor/Client/Components/CarDetails.razor" Line="1" Column="1" />
+      <File FileName="Shop.Blazor/Client/Components/CarsList.razor" Line="22" Column="32" />
+      <File FileName="Shop.Blazor/Client/Models/DetailsViewModel.cs" Line="1" Column="1" />
+      <File FileName="Shop.Blazor/Client/Models/ListViewModel.cs" Line="1" Column="1" />
+      <File FileName="Shop.Blazor/Client/_Imports.razor" Line="1" Column="1" />
+      <File FileName="Shop.Blazor/Client/Pages/FetchData.razor" Line="1" Column="1" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Shop" expanded="True">
-            <Node name="Shop" expanded="True">
-              <Node name="ConnectedServicesFolder" selected="True" />
+            <Node name="Shop.Blazor.Client" expanded="True">
+              <Node name="Components" expanded="True" />
+              <Node name="Models" expanded="True" />
+              <Node name="Pages" expanded="True">
+                <Node name="FetchData.razor" selected="True" />
+              </Node>
             </Node>
+            <Node name="Shop.Blazor.Server" expanded="True">
+              <Node name="wwwroot" expanded="True" />
+            </Node>
+            <Node name="Shop.Blazor.Shared" expanded="True" />
           </Node>
         </State>
       </Pad>

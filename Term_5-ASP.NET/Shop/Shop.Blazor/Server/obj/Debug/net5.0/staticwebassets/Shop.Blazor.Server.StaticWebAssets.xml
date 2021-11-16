@@ -1,0 +1,7 @@
+﻿<StaticWebAssets Version="1.0">
+  <ContentRoot BasePath="/" Path="/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop.Blazor/Client/bin/Debug/net5.0/wwwroot/" />
+  <ContentRoot BasePath="/" Path="/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop.Blazor/Client/obj/Debug/net5.0/scopedcss/bundle/" />
+  <ContentRoot BasePath="/" Path="/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop.Blazor/Client/wwwroot/" />
+  <ContentRoot BasePath="/Identity" Path="/Users/kremenevskiy/.nuget/packages/microsoft.aspnetcore.identity.ui/5.0.11/build/../staticwebassets/V4/" />
+  <ContentRoot BasePath="_content/Shop" Path="/Users/kremenevskiy/Desktop/labs/Term_5-ASP.NET/Shop/Shop/wwwroot/" />
+</StaticWebAssets>

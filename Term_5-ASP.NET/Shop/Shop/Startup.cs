@@ -22,7 +22,7 @@ namespace Shop
     public class Startup
     {
 
-        private IConfigurationRoot _confstring;
+        
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
