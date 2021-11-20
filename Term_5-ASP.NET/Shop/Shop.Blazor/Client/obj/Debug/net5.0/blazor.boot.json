@@ -225,6 +225,7 @@
     },
     "lazyAssembly": null,
     "pdb": {
+      "Shop.Blazor.Shared.pdb": "sha256-jOhfknytSYaO80vJgQSI14AsChrLo3yGEdMhTVV9Ak8=",
       "Shop.Blazor.Client.pdb": "sha256-ToqgTueGsQZpal8gminAzy7W4fIzVceVkeOhcJcTmmM="
     },
     "runtime": {
