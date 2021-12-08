@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var buttonLandscape: Button
     lateinit var buttonPortrait: Button
 
+
     class ParseInput {
         var displayText: String = "0"
         var storedText: String = ""
@@ -293,6 +294,8 @@ class MainActivity : AppCompatActivity() {
         bind.displayEditText.text = "0"
 
 
+
+
         bind.buttonSetLandscape?.setOnClickListener {
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
             Toast.makeText(baseContext, "Landscape Orientation", Toast.LENGTH_SHORT).show()
@@ -369,19 +372,54 @@ class MainActivity : AppCompatActivity() {
     fun addBTNPush(view : View){
         parsing.operatorPressed("+")
         bind.displayEditText.text = parsing.getInput()
+        specialBtnPushed("add")
     }
     fun subtractBTNPush(view : View){
         parsing.operatorPressed("-")
         bind.displayEditText.text = parsing.getInput()
+        specialBtnPushed("sub")
     }
     fun multiplyBTNPush(view : View){
         parsing.operatorPressed("*")
         bind.displayEditText.text = parsing.getInput()
+        specialBtnPushed("mult")
     }
     fun divBTNPush(view : View){
         parsing.operatorPressed("/")
         bind.displayEditText.text = parsing.getInput()
+        specialBtnPushed("div")
     }
+
+
+    fun specialBtnPushed(name: String){
+        // div
+        bind.button?.setBackgroundResource(R.drawable.arithmetic_button_background)
+        // mult
+        bind.button8?.setBackgroundResource(R.drawable.arithmetic_button_background)
+        // minus
+        bind.button12?.setBackgroundResource(R.drawable.arithmetic_button_background)
+        // plus
+        bind.button16?.setBackgroundResource(R.drawable.arithmetic_button_background)
+        // equal
+        bind.button20?.setBackgroundResource(R.drawable.equals_button_background)
+        if (name == "add"){
+            bind.button16?.setBackgroundResource(R.drawable.selected_arithmetic)
+        }
+        if (name == "sub"){
+            bind.button12?.setBackgroundResource(R.drawable.selected_arithmetic)
+        }
+        if (name == "mult"){
+            bind.button8?.setBackgroundResource(R.drawable.selected_arithmetic)
+        }
+        if (name == "div") {
+            bind.button?.setBackgroundResource(R.drawable.selected_arithmetic)
+        }
+        if (name == "equal"){
+            bind.button20?.setBackgroundResource(R.drawable.selected_arithmetic)
+        }
+    }
+
+
     fun dotBTNPush(view : View){
         parsing.addNum(".")
         bind.displayEditText.text = parsing.getInput()
@@ -389,15 +427,18 @@ class MainActivity : AppCompatActivity() {
     fun fibonacciBTNPush(view : View){
         parsing.scientificPressed("Fib(")
         bind.displayEditText.text = parsing.getInput()
+        specialBtnPushed("x")
     }
     fun exponentBTNPush(view : View){
         parsing.scientificPressed("exp(")
         bind.displayEditText.text = parsing.getInput()
+        specialBtnPushed("x")
     }
     fun clearBTNPush(view : View){
         parsing.clearPressed()
         bind.displayEditText.text = parsing.getInput()
         bind.previousCalculationView.text = ""
+        specialBtnPushed("x")
     }
     fun backspaceBTNPush(view : View){
         parsing.removeLast()
@@ -416,6 +457,7 @@ class MainActivity : AppCompatActivity() {
     fun equalBTNPush(view : View){
         parsing.equalPressed()
         bind.displayEditText.text = parsing.displayText
+        specialBtnPushed("equal")
 //        var userExpr = bind.textViewEditable.text.toString()
 //
 //        bind.previousCalculationView.text = userExpr
@@ -432,61 +474,77 @@ class MainActivity : AppCompatActivity() {
     fun trigSinBTNPush(view : View){
         parsing.scientificPressed("sin(")
         bind.displayEditText.text = parsing.getInput()
+        specialBtnPushed("x")
     }
+
     fun trigCosBTNPush(view : View){
         parsing.scientificPressed("cos(")
         bind.displayEditText.text = parsing.getInput()
+        specialBtnPushed("x")
     }
     fun trigTanBTNPush(view : View){
         parsing.scientificPressed("tan(")
         bind.displayEditText.text = parsing.getInput()
+        specialBtnPushed("x")
     }
     fun trigArcSinBTNPush(view : View){
         parsing.scientificPressed("arcsin(")
         bind.displayEditText.text = parsing.getInput()
+        specialBtnPushed("x")
     }
     fun trigArcCosBTNPush(view : View){
         parsing.scientificPressed("arccos(")
         bind.displayEditText.text = parsing.getInput()
+        specialBtnPushed("x")
     }
     fun trigArcTanBTNPush(view : View){
         parsing.scientificPressed("arctan(")
         bind.displayEditText.text = parsing.getInput()
+        specialBtnPushed("x")
     }
     fun logBTNPush(view : View){
         parsing.scientificPressed("log2(")
         bind.displayEditText.text = parsing.getInput()
+        specialBtnPushed("x")
     }
     fun naturalLogBTNPush(view : View){
         parsing.scientificPressed("ln(")
         bind.displayEditText.text = parsing.getInput()
+        specialBtnPushed("x")
     }
     fun squareRootTNPush(view : View){
         parsing.scientificPressed("sqrt(")
         bind.displayEditText.text = parsing.getInput()
+        specialBtnPushed("x")
     }
     fun eBTNPush(view : View){
         parsing.extraStaffPressed("e")
         bind.displayEditText.text = parsing.getInput()
+        specialBtnPushed("x")
     }
     fun piBTNPush(view : View){
         parsing.extraStaffPressed("pi")
         bind.displayEditText.text = parsing.getInput()
+        specialBtnPushed("x")
     }
     fun absoluteValueBTNPush(view : View){
         parsing.scientificPressed("abs(")
         bind.displayEditText.text = parsing.getInput()
+        specialBtnPushed("x")
     }
     fun isPrimeBTNPush(view : View){
         parsing.scientificPressed("ispr(")
         bind.displayEditText.text = parsing.getInput()
+        specialBtnPushed("x")
     }
     fun xSquaredBTNPush(view : View){
         parsing.extraStaffPressed("^(2)")
         bind.displayEditText.text = parsing.getInput()
+        specialBtnPushed("x")
     }
     fun xPowerYBTNPush(view : View){
         parsing.extraStaffPressed("^(")
         bind.displayEditText.text = parsing.getInput()
+        specialBtnPushed("x")
     }
 }
