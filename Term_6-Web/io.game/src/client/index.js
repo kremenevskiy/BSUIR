@@ -1,8 +1,14 @@
+
+
+var socket;
+socket = io.connect('http://localhost:3000');
+
 const canvas = document.querySelector('canvas');
 var c = canvas.getContext('2d');
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
+
 
 function lerp(start, end, t){
     return start*(1-t) + end * t;
@@ -25,6 +31,11 @@ function limit(posX, posY, max){
         x: posX,
         y: posY
     }
+}
+
+
+function constrain(x, min, max) {
+    return Math.max(Math.min(x, max), min);
 }
 
 
@@ -62,9 +73,9 @@ class Player {
     constructor(x, y, radius, color){
         this.x = x;
         this.y = y;
-
         this.radius = radius;
         this.color = color;
+        this.dir = Math.PI * 2;
         this.velocity = {
             x: 0,
             y: 0
@@ -74,7 +85,10 @@ class Player {
 
 
     updateVel() {
-        
+
+        const angle = Math.atan2(mouseY - canvas.height / 2,
+            mouseX - canvas.width / 2);
+        this.dir = angle;
         var vel = {
             x: mouseX - canvas.width/2,
             y: mouseY - canvas.height/2,
@@ -106,6 +120,11 @@ class Player {
         this.y = this.y + this.velocity.y;
     }
 
+    constr(){
+        this.x = constrain(this.x, -canvas.width, canvas.width)
+        this.y = constrain(this.y, -canvas.height, canvas.height)
+    }
+
     draw() {
         c.beginPath()
         c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false); 
@@ -113,18 +132,18 @@ class Player {
         c.fill();
      }
 
-     eats(other){
-         var dist =  vecDist(this.x, this.y, other.x, other.y);
-         if (dist < this.radius + other.radius){
-             var square = this.radius * this.radius * Math.PI + other.radius * other.radius * Math.PI;
-             this.radius = Math.sqrt(square / Math.PI);
-            //  this.radius += other.radius;
-             return true;
-         }
-         else {
-             return false;
-         }
-     }
+    //  eats(other){
+    //      var dist =  vecDist(this.x, this.y, other.x, other.y);
+    //      if (dist < this.radius + other.radius){
+    //          var square = this.radius * this.radius * Math.PI + other.radius * other.radius * Math.PI;
+    //          this.radius = Math.sqrt(square / Math.PI);
+    //         //  this.radius += other.radius;
+    //          return true;
+    //      }
+    //      else {
+    //          return false;
+    //      }
+    //  }
 }
 
 function vecDist(v1_x, v1_y, v2_x, v2_y){
@@ -158,18 +177,50 @@ class Projectile {
 
 
 
+
+
+
 const x = canvas.width / 2;
 const y = canvas.height / 2;
 
-var player = new Player(x, y, 30, 'blue');
-eat = [];
+var player = new Player(Math.random() * x, Math.random() * y, Math.random() * 30 + 10, 'blue');
+
+
+var data = {
+    x: player.x,
+    y: player.y,
+    r: player.radius,
+    dir: player.dir,
+};
+
+// console.log('sending data: ')
+// console.log(data);
+
+socket.emit('join_game', data);
+
+
+var bullets = [];
+var players = [];
+var eat = [];
+socket.on('game_update',
+    function(data) {
+        // console.log("update");
+        // console.log(data);
+        players = data.others;
+        bullets = data.bullets;
+    }
+);
+
+
+
+
 
 const rand_col = () => {
     return Math.random() * 256;
 }
 
-N = 1000;
-for(var i = 0; i < N; ++i){
+const N = 100;
+for(let i = 0; i < N; ++i){
     eat[i] = new Eat((Math.round(Math.random()) * 2 - 1) * Math.random() * canvas.width,(Math.round(Math.random()) * 2 - 1) *  Math.random() * canvas.height, 4, 
     `rgb(${rand_col()}, ${rand_col()}, ${rand_col()})`)
 }
@@ -178,10 +229,10 @@ for(var i = 0; i < N; ++i){
 var projectiles = [];
  
 // console.log(player);
-setInterval(() => {
-    console.log("player : " + player.x + " " + player.y);
+// setInterval(() => {
+//     console.log("player : " + player.x + " " + player.y);
 
-}, 1000);
+// }, 1000);
 
 
 
@@ -197,11 +248,42 @@ function animate() {
     var newZoom = 30 / player.radius;
     zoom = lerp(zoom, newZoom, 0.1);
     c.scale(zoom, zoom);
-    c.translate(-player.x, -player.y)
+    c.translate(-player.x, -player.y);
+
+
+    for (var i = players.length - 1; i >= 0; --i){
+
+        if (players[i].id !== socket.id){
+            c.beginPath()
+            c.arc(players[i].position.x, players[i].position.y, players[i].r, 0, Math.PI * 2, false);
+            c.fillStyle = 'orange';
+            c.fill();
+            
+            // c.beginPath();
+            // c.fillStyle = "white";
+            // c.textAlign = "center";
+            // c.font = '10px serif';
+            // c.fillText(players[i].id, players[i].x, players[i].y);
+            // c.fill();
+        }
+        
+    }
+
+
     player.draw();
+
     player.updateVel();
+    player.constr();
+
+
+    var data = {
+        x: player.x,
+        y: player.y,
+        r: player.radius,
+        id: socket.id
+    };
     
-    
+    socket.emit('update_input', data);
     
 
     
@@ -209,16 +291,28 @@ function animate() {
         foody.draw();
     })
     
-    projectiles.forEach((projectile) => {
-        projectile.update();
+    // projectiles.forEach((projectile) => {
+    //     projectile.update();
+    // })
+
+    bullets.forEach((bullet) => {
+        c.beginPath()
+        c.arc(bullet.position.x, bullet.position.y, 8   , 0, Math.PI * 2, false);
+        c.fillStyle = 'red';
+        c.fill();
     })
+
     c.restore();
 
-    for(var i = eat.length - 1; i >= 0; --i){
-        if (player.eats(eat[i])){
-            eat.splice(i, 1);
-        }
-    }
+    // for(var i = eat.length - 1; i >= 0; --i){
+    //     if (player.eats(eat[i])){
+    //         eat.splice(i, 1);
+    //         socket.emit('updateeat', eat);
+    //     }
+    // }
+
+
+    // socket.emit('updateeat', eat)
 
 }
 
@@ -226,18 +320,26 @@ function animate() {
 window.addEventListener('click', (event) => {
     const angle = Math.atan2(event.clientY - canvas.height / 2,
         event.clientX - canvas.width / 2);
-    console.log(angle*180/Math.PI);
+    
 
     const velocity = {
         x: Math.cos(angle),
         y: Math.sin(angle)
     }
 
+    var bulletData = {
+        x: player.x,
+        y: player.y,
+        dir: angle
+    }
+
+    console.log('newbullet with: ' + bulletData.x + "Y: " + bulletData.y)
+    socket.emit('newbullet', bulletData);
+
     projectiles.push(new Projectile(
         player.x, player.y,
         5, 'red', velocity
     ))
     
-    console.log(projectiles.length);
 })
 animate();
