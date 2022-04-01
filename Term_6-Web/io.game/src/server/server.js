@@ -54,7 +54,7 @@ const room = new Room();
 room.setup();
 function joinGame(username='krem'){
     console.log('joining game: ' + this.id);
-    room.addPlayer(this, username);
+    room.addPlayer(this, 'kremenevskiy');
 }
 
 var cnt = 0;

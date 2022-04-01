@@ -164,7 +164,6 @@ class Room {
         // console.log('\t\t\t\t\t-----------------------------')
         // console.log(this.players)
         // console.log('making update game to client:')
-        const leaderboard = this.getLeaderboard();
         Object.keys(this.sockets).forEach(playerID => {
             const socket = this.sockets[playerID];
             // console.log('*******************************')
@@ -176,18 +175,11 @@ class Room {
             // console.log(this.createUpdate(player));
             // console.log('*******************************')
 
-            socket.emit(Constants.MSG_TYPES.GAME_UPDATE, this.createUpdate(player, leaderboard));
+            socket.emit(Constants.MSG_TYPES.GAME_UPDATE, this.createUpdate(player));
         })
     }
 
-    getLeaderboard() {
-        return Object.values(this.players)
-            .sort((p1, p2) => p2.score - p1.score)
-            .slice(0, 5)
-            .map(p => ({username: p.username, score:Math.round(p.score)}))
-    }
-
-    createUpdate(player, leaderboard){
+    createUpdate(player){
         // console.log('sending update');
         var data = {
             me: player.serializeForUpdate(),
@@ -203,8 +195,7 @@ class Room {
             me: player.serializeForUpdate(),
             others: Object.values(this.players).map(p => p.serializeForUpdate()),
             bullets: this.bullets.map(b => b.serializeForUpdate()),
-            food: this.foods.map(f => f.serializeForUpdate()),
-            leaderboard: leaderboard
+            food: this.foods.map(f => f.serializeForUpdate())
         }
     }
 }
