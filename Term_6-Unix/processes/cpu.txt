@@ -1,0 +1,10 @@
+USER               PID COMMAND          %MEM  %CPU
+kremenevskiy     19665 /System/Applicat  0.7  48.9
+_windowserver      146 /System/Library/  0.8   4.4
+kremenevskiy     15235 /Applications/Go  0.6   2.5
+kremenevskiy       383 /Applications/Go  2.4   2.1
+kremenevskiy     21004 /Applications/Di  0.6   1.7
+kremenevskiy       540 /Applications/Go  1.4   1.3
+kremenevskiy       637 /System/Applicat  0.9   0.7
+kremenevskiy       541 /Applications/Go  0.3   0.3
+kremenevskiy     22178 /Applications/Go  1.8   0.2
