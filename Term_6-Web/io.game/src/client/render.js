@@ -212,8 +212,7 @@ function render() {
 
     // draw boundaries
     c.fillStyle = 'black';
-    c.lineWidth = 10;
-    c.strokeStyle = 'yellow';
+    c.lineWidth = 1;
     c.strokeRect(-Constants.MAP_SIZE, -Constants.MAP_SIZE, Constants.MAP_SIZE*2, Constants.MAP_SIZE*2);
 
 
