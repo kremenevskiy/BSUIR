@@ -23,19 +23,37 @@ class Player extends MovableObject {
         super(id, x, y, Math.random() * 2 * Math.PI, Constants.PLAYERS_SPEED)
         this.username = username;
         this.hp = Constants.PLAYER_MAX_HP;
+        this.hp_max = Constants.PLAYER_MAX_HP;
         this.score = 0;
         this.r = r;
         this.vel_mid = new Vector(0, 0);
         this.velocity = new Vector(-1, 1);
         this.color = getRandomColor();
+
+
         this.damage = Constants.BULLET_DAMAGE;
         this.canvas_size = Constants.MAP_SIZE;
         this.dead = false;
 
 
+        this.player_lvl = 1;
+        this.progress_to_next_lvl = 0;
+        this.points_to_upgrade = 0;
+
+
+        this.damage_lvl = 1;
+        this.speed_lvl = 1;
+        this.hp_lvl = 1;
+        this.reload_lvl = 1;
+        this.range_lvl = 1;
+        this.speed_lvl = 1;
+        this.damage_lvl = 1;
+        this.regen_lvl = 1;
+
+
 
         // shooting
-        this.shooting_reload_tine = 200;
+        this.shooting_reload_time = 200;
         this.can_shoot = true;
 
 
@@ -44,13 +62,18 @@ class Player extends MovableObject {
         // for scaling
         this.zoom = 1;
 
+        this.shoot_range = Constants.BULLET_MIN_RANGE_SHOOT;
+        this.bullet_speed = Constants.BULLET_SPEED;
+
+        this.bullet_radius = Constants.BULLET_RADIUS;
+
 
 
         // Regen
         this.start_regen = false;
 
         this.health_regen_time = 100;
-        this.timeout_regen_time = 5000;
+        this.timeout_regen_time = Constants.PLAYER_MAX_REGEN_TIME;
         this.regen_amount_hp = 1;
 
         this.regInt = null;
@@ -64,11 +87,26 @@ class Player extends MovableObject {
             this.can_shoot = false;
             setTimeout(() => {
                this.can_shoot = true;
-            }, this.shooting_reload_tine);
+            }, this.shooting_reload_time);
 
             return true;
         }
         return false;
+    }
+
+    checkShootIsPossible(){
+
+        let this_square = Math.PI * this.r * this.r;
+        let bullet_square = Math.PI * this.bullet_radius * this.bullet_radius;
+
+
+        // console.log('player r: ', this.r)
+        // console.log('bullet r: ', this.bullet_radius)
+        // console.log('player square: ', this_square)
+        // console.log('bullet square: ', bullet_square)
+
+        return (this_square - bullet_square) > this_square * 0.5;
+
     }
 
 
@@ -79,7 +117,8 @@ class Player extends MovableObject {
         var vel = new Vector(this.vel_mid.x, this.vel_mid.y)
         // console.log("vel to update: x:" + vel.x + " y: " + vel.y);
         vel.div(10);
-        vel.limit(4);
+        vel.limit(4 + this.speed * 0.2);
+        // vel.mult(this.speed);
         // console.log("\t\t\tvelocity new  to update: x:" + this.velocity.x + " y: " + this.velocity.y);
 
         this.velocity.lerp(vel, 0.1);
@@ -96,9 +135,15 @@ class Player extends MovableObject {
             ...(super.serializeForUpdate()),
             r: this.r,
             hp: this.hp,
+            hp_max: this.hp_max,
             color: this.color,
             nickname: this.username,
-            score: this.score
+            score: this.score,
+            score_to_next_lvl: this.progress_to_next_lvl,
+            lvl: this.player_lvl,
+            update_points: this.points_to_upgrade,
+            bullet_r: this.bullet_radius
+
         }
     }
 
@@ -109,9 +154,9 @@ class Player extends MovableObject {
                 if (this.hp >= 100){
                     this.start_regen = false;
                 }
-                if (this.hp < Constants.PLAYER_MAX_HP) {
-                    if (this.hp + this.regen_amount_hp > Constants.PLAYER_MAX_HP) {
-                        this.hp = Constants.PLAYER_MAX_HP;
+                if (this.hp < this.hp_max) {
+                    if (this.hp + this.regen_amount_hp > this.hp_max) {
+                        this.hp = this.hp_max;
                     } else {
                         this.hp += this.regen_amount_hp;
                     }
@@ -130,7 +175,7 @@ class Player extends MovableObject {
             var square_area = this.r * this.r * Math.PI + food.r * food.r * Math.PI;
             this.r = Math.sqrt(square_area / Math.PI);
 
-            this.score += Constants.SCORE_FOR_FOOD;
+            this.addScore(Constants.SCORE_FOR_FOOD);
             // this.r += food.r;
             return true;
         }
@@ -152,20 +197,20 @@ class Player extends MovableObject {
 
             // add score
 
-            this.score += otherPlayer.score * 0.8;
+            this.addScore(otherPlayer.score * 0.8);
             return true;
         }
         return false
     }
 
 
-    makeShoot(bullet){
+    makeShoot(){
         if (this.r < 10) {
             return;
         }
-        if (this.r - bullet.r > 0) {
+        if (this.r - this.bullet_radius > 2) {
             let this_area = Math.PI * this.r * this.r;
-            let bullet_area = Math.PI * bullet.r * bullet.r;
+            let bullet_area = Math.PI * this.bullet_radius * this.bullet_radius;
             // console.log('square p : ',this_area);
             // console.log('square bull: ',bullet_area);
             this_area -= bullet_area;
@@ -198,32 +243,84 @@ class Player extends MovableObject {
     }
 
 
-    addDamage(){
+    try_to_update(cost){
+        if (this.points_to_upgrade - cost >= 0){
+            this.points_to_upgrade -= cost;
+            return true;
+        }
+        return false;
+    }
+
+
+    upgrade_level(){
+        this.player_lvl ++;
+        this.progress_to_next_lvl = 0;
+        this.points_to_upgrade ++;
+    }
+
+
+    addScore(score){
+        this.score += score;
+        this.progress_to_next_lvl += score;
+
+        if (this.progress_to_next_lvl > Math.pow(this.player_lvl, 2)){
+            this.upgrade_level();
+        }
 
     }
 
+
+    addDamage(){
+        this.damage_lvl ++;
+        this.damage = this.damage_lvl * Constants.BULLET_DAMAGE;
+        this.bullet_radius = Constants.BULLET_RADIUS + this.damage_lvl;
+    }
+
     decDamage(){
+        if (this.damage_lvl === 1) {
+            return;
+        }
+
+        this.damage_lvl --;
+        this.damage = this.damage_lvl * Constants.BULLET_DAMAGE;
+        this.bullet_radius = Constants.BULLET_RADIUS + this.damage_lvl;
+
 
     }
 
     addHealth(){
+        this.hp_lvl ++;
+        this.hp = this.hp_lvl * this.hp;
+        this.hp_max = this.hp_lvl * Constants.PLAYER_MAX_HP;
 
     }
 
     addReload(){
+        if (this.reload_lvl >= 9){
+            return
+        }
+        this.reload_lvl ++;
+        this.shooting_reload_time = this.shooting_reload_time * (this.reload_lvl / 10);
 
     }
 
     addRange(){
-
+        this.range_lvl ++;
+        this.shoot_range = this.shoot_range * 1.1;
+        this.bullet_speed = Constants.BULLET_SPEED + this.range_lvl;
     }
 
     addRegen(){
-
+        if (this.timeout_regen_time < 1000){
+            return;
+        }
+        this.regen_lvl ++;
+        this.timeout_regen_time = Constants.PLAYER_MAX_REGEN_TIME - this.regen_lvl * 250;
     }
 
     addSpeed(){
-
+        this.speed_lvl ++;
+        this.speed = Constants.PLAYERS_SPEED + this.speed_lvl * 2;
     }
 
 }
