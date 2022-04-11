@@ -300,9 +300,9 @@ class Room {
         }
 
 
-        if (!this.players[playerID].try_to_update(points_cost)){
-            return false;
-        }
+        // if (!this.players[playerID].try_to_update(points_cost)){
+        //     return false;
+        // }
 
         if (skill_data === 'damage_add'){
             this.players[playerID].addDamage();

@@ -307,9 +307,9 @@ class Player extends MovableObject {
     }
 
     addReload(){
-        if (this.reload_lvl >= 9){
-            return
-        }
+        // if (this.reload_lvl >= 9){
+        //     return
+        // }
         this.reload_lvl ++;
         this.shooting_reload_time = this.shooting_reload_time * (this.reload_lvl / 10);
 
