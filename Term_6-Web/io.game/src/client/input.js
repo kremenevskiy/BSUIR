@@ -24,11 +24,11 @@ const upgrade_menu = document.getElementById('upgrade-menu');
 
 const canvas = document.querySelector('canvas')
 
-export var mouseX = 0;
-export var mouseY = 0;
+export let mouseX = 0;
+export let mouseY = 0;
 
-var mouseUp = true;
-var button_pressed = false;
+let mouseUp = true;
+let button_pressed = false;
 
 
 function onMouseMove(event) {
@@ -51,7 +51,7 @@ function onMouseDown(event) {
         return;
     }
 
-    var shoot_int = setInterval(() => {
+    const shoot_int = setInterval(() => {
         const dir = Math.atan2(mouseY - canvasHeight / 2, mouseX - canvasWidth / 2);
         createBullet(dir)
         if (mouseUp) {
@@ -71,7 +71,7 @@ function handleMove(x, y) {
     // console.log('hangle move');
     // console.log('size: ' + window.innerWidth/2 + " " + window.innerWidth/2)
     const angle = Math.atan2(y - canvasHeight / 2, x - canvasWidth / 2);
-    var update_data = {
+    const update_data = {
         dir: angle,
         vel_mid: {
             x: mouseX - window.innerWidth / 2,

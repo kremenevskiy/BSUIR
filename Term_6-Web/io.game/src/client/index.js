@@ -19,8 +19,8 @@ const upgradeMenu = document.getElementById('upgrade-menu');
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-export var canvasWidth = canvas.width;
-export var canvasHeight = canvas.height;
+export let canvasWidth = canvas.width;
+export let canvasHeight = canvas.height;
 
 
 Promise.all([connect(onGameOver)])

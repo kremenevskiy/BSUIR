@@ -1,5 +1,5 @@
 const Player = require('./player')
-var express = require('express');
+const express = require('express');
 const Food = require('./food')
 const Bullet = require('./bullet')
 const Constants = require('../shared/constants')
@@ -11,12 +11,12 @@ const path = require('path')
 const width = 1000;
 const height = 1000;
 
-var app = express();
-var server = app.listen(process.env.PORT || 3000, 'localhost', listen);
+const app = express();
+const server = app.listen(process.env.PORT || 3000, 'localhost', listen);
 
 function listen(){
-    var host = server.address().address;
-    var port = server.address().port;
+    const host = server.address().address;
+    const port = server.address().port;
     console.log("Server listening on http://" + host + ":" + port);
 }
 
@@ -24,13 +24,13 @@ function listen(){
 app.use(express.static('dist'));
 
 
-var io = require('socket.io')(server);
+const io = require('socket.io')(server);
 
 
 function getRandomColor() {
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
       color += letters[Math.floor(Math.random() * 16)];
     }
     return color;
@@ -70,7 +70,7 @@ function joinGame(username){
     room.addPlayer(this, username);
 }
 
-// var cnt = 0;
+// let cnt = 0;
 function updatePlayer(update_data){
     // console.log('got new move from player!')
     // console.log(update_data)

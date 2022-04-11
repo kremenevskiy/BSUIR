@@ -3,9 +3,9 @@ const Constants = require('../shared/constants')
 const Vector = require('./vector')
 
 function getRandomColor() {
-    var letters = '0123456789ABCDEF';
-    var color = "#";
-    for (var i = 0; i < 6; ++i) {
+    let letters = '0123456789ABCDEF';
+    let color = "#";
+    for (let i = 0; i < 6; ++i) {
         color += letters[Math.floor(Math.random() * 16)];
     }
     return color;
@@ -14,7 +14,7 @@ function getRandomColor() {
 class Player extends MovableObject {
     constructor(id, username, x, y, r) {
         // console.log('-------------------------');
-        // var args = [...arguments];
+        // let args = [...arguments];
         //
         // console.log(username)
         // console.log(x + " | " + y + " | " + r)
@@ -114,7 +114,7 @@ class Player extends MovableObject {
 
     update(){
         // console.log("updating player from: x: " + this.pos.x + "y: " + this.pos.y)
-        var vel = new Vector(this.vel_mid.x, this.vel_mid.y)
+        let vel = new Vector(this.vel_mid.x, this.vel_mid.y)
         // console.log("vel to update: x:" + vel.x + " y: " + vel.y);
         vel.div(10);
         vel.limit(4 + this.speed * 0.2);
@@ -170,9 +170,9 @@ class Player extends MovableObject {
 
 
     eatsFood(food){
-        var dist = this.pos.dist(food.pos);
+        const dist = this.pos.dist(food.pos);
         if (dist < this.r + food.r){
-            var square_area = this.r * this.r * Math.PI + food.r * food.r * Math.PI;
+            const square_area = this.r * this.r * Math.PI + food.r * food.r * Math.PI;
             this.r = Math.sqrt(square_area / Math.PI);
 
             this.addScore(Constants.SCORE_FOR_FOOD);

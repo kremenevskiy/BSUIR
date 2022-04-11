@@ -5,12 +5,12 @@ import {canvasHeight, canvasWidth} from "./index";
 
 
 const canvas = document.querySelector('canvas');
-var c = canvas.getContext('2d');
+const c = canvas.getContext('2d');
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-var zoom = 1;
+let zoom = 1;
 
 
 function render() {
@@ -26,7 +26,7 @@ function render() {
     c.clearRect(0, 0, canvas.width, canvas.height);
     c.save();
     c.translate(canvas.width/2, canvas.height/2);
-    var newZoom = 30  / me.r;
+    let newZoom = 30  / me.r;
     zoom = lerp(zoom, newZoom, 0.1);
 
 
@@ -89,7 +89,7 @@ function render() {
 
 }
 
-var strokeColor = getRandomColor();
+let strokeColor = getRandomColor();
 
 function renderPlayer(player) {
     // const {position, r, h, color } = player;
@@ -168,9 +168,9 @@ function lerp(start, end, t){
 }
 
 function getRandomColor() {
-    var letters = '0123456789ABCDEF';
-    var color = "#";
-    for (var i = 0; i < 6; ++i) {
+    let letters = '0123456789ABCDEF';
+    let color = "#";
+    for (let i = 0; i < 6; ++i) {
         color += letters[Math.floor(Math.random() * 16)];
     }
     return color;

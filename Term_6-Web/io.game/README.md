@@ -1,4 +1,9 @@
 ## Multiplayer Server-Client IO.GAME
+> Online game running directly in browser, supporting up to 30 players playing together
+> <br> 
+> (if you run server on strong machine) :) 
+##### Developed by Vladislav Kremenevskiy
+##### Group number: 953591
 
 > Fan fact: Idea was to write funny online game, so I think did it :)
 

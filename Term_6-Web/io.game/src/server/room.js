@@ -28,7 +28,7 @@ class Room {
 
     updateFood() {
         if (this.foods.length < this.max_food_amount) {
-            var generate = Math.random();
+            const generate = Math.random();
             if (generate > 0.5){
                 this.foods.push(this.generateOneFood());
             }
@@ -253,7 +253,7 @@ class Room {
 
     createUpdate(player, leaderboard){
         // console.log('sending update');
-        var data = {
+        const data = {
             me: player.serializeForUpdate(),
             others: Object.values(this.players).map(p => p.serializeForUpdate()),
             bullets: this.bullets.map(b => b.serializeForUpdate())

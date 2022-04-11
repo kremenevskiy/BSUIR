@@ -4,8 +4,7 @@ import {canvasWidth, canvasHeight} from "./index";
 
 const Constants = require('@constants/constants');
 
-export var socket = io.connect(window.location.host, {reconnection: false})
-
+export const socket = io.connect(window.location.host, {reconnection: false})
 
 
 const connectedPromise = new Promise((resolve, reject) => {
