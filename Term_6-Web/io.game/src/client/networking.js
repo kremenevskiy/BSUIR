@@ -59,13 +59,13 @@ export const play = username => {
     socket.emit(Constants.MSG_TYPES.CANVAS_GET, canvas_size);
 }
 
-export const updateDirection = throttle(100, (update_data) => {
+export const updateDirection = throttle(30, (update_data) => {
     // console.log('sending new data to server');
     // console.log(update_data)
     socket.emit(Constants.MSG_TYPES.UPDATE_INPUT, update_data);
 })
 
-export const createBullet = throttle(100, (dir) => {
+export const createBullet = throttle(30, (dir) => {
     socket.emit(Constants.MSG_TYPES.NEW_BULLET, dir);
 })
 
