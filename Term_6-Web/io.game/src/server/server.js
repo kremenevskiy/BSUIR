@@ -1,5 +1,5 @@
 const Player = require('./player')
-var express = require('express');
+const express = require('express');
 const Food = require('./food')
 const Bullet = require('./bullet')
 const Constants = require('../shared/constants')
@@ -11,12 +11,12 @@ const path = require('path')
 const width = 1000;
 const height = 1000;
 
-var app = express();
-var server = app.listen(process.env.PORT || 3000, 'localhost', listen);
+const app = express();
+const server = app.listen(process.env.PORT || 3000, 'localhost', listen);
 
 function listen(){
-    var host = server.address().address;
-    var port = server.address().port;
+    const host = server.address().address;
+    const port = server.address().port;
     console.log("Server listening on http://" + host + ":" + port);
 }
 
@@ -24,13 +24,13 @@ function listen(){
 app.use(express.static('dist'));
 
 
-var io = require('socket.io')(server);
+const io = require('socket.io')(server);
 
 
 function getRandomColor() {
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
       color += letters[Math.floor(Math.random() * 16)];
     }
     return color;
@@ -43,8 +43,18 @@ function newConnection(socket){
     socket.on(Constants.MSG_TYPES.JOIN_GAME, joinGame);
     socket.on(Constants.MSG_TYPES.UPDATE_INPUT, updatePlayer);
     socket.on(Constants.MSG_TYPES.NEW_BULLET, addBullet);
-    socket.on('disconnect', onDisconnect);
+    socket.on(Constants.MSG_TYPES.CANVAS_GET, setCanvasSize);
 
+    // update players
+    socket.on(Constants.MSG_TYPES.DAMAGE_ADD, damage_add);
+    socket.on(Constants.MSG_TYPES.DAMAGE_DEC, damage_dec);
+    socket.on(Constants.MSG_TYPES.HEALTH_ADD, health_add);
+    socket.on(Constants.MSG_TYPES.REGEN_ADD, regen_add);
+    socket.on(Constants.MSG_TYPES.SPEED_ADD, speed_add);
+    socket.on(Constants.MSG_TYPES.RELOAD_ADD, reload_add);
+    socket.on(Constants.MSG_TYPES.RANGE_ADD, range_add);
+
+    socket.on('disconnect', onDisconnect);
 }
 
 
@@ -52,12 +62,15 @@ function newConnection(socket){
 
 const room = new Room();
 room.setup();
-function joinGame(username='krem'){
-    console.log('joining game: ' + this.id);
+function joinGame(username){
+    if (username === ""){
+        username = "NoName";
+    }
+    console.log('New player joined the game: \nName: ' +  username + "Socket id: " + this.id);
     room.addPlayer(this, username);
 }
 
-var cnt = 0;
+// let cnt = 0;
 function updatePlayer(update_data){
     // console.log('got new move from player!')
     // console.log(update_data)
@@ -79,8 +92,42 @@ function addBullet(dir){
     room.addBullet(this.id, dir);
 }
 
+function setCanvasSize(canvas_size) {
+    room.updatePlayerCanvas(this.id, canvas_size);
+}
+
 
 function onDisconnect(){
     console.log("Player: " + this.id + " disconnected!");
     room.removePlayer(this);
+}
+
+
+function damage_add(damageData) {
+    room.upgradePlayer(this.id, damageData);
+}
+
+function damage_dec(damageData) {
+    room.upgradePlayer(this.id, damageData);
+}
+
+function health_add(healthData) {
+    room.upgradePlayer(this.id, healthData);
+}
+
+function speed_add(speedData) {
+    room.upgradePlayer(this.id, speedData);
+}
+
+function regen_add(regenData) {
+    room.upgradePlayer(this.id, regenData);
+}
+
+
+function reload_add(reloadData) {
+    room.upgradePlayer(this.id, reloadData);
+}
+
+function range_add(rangeData) {
+    room.upgradePlayer(this.id, rangeData);
 }

@@ -1,26 +1,19 @@
 ## Multiplayer Server-Client IO.GAME
-> Online game running directrly in browser
-> Current version already supporting multiplying in local network
+> Online game running directly in browser, supporting up to 30 players playing together
+> <br> 
+> (if you run server on strong machine) :) 
+##### Developed by Vladislav Kremenevskiy
+##### Group number: 953591
 
-> Developping by Vlad Kremenevskiy
-> Group: 953501
+> Fan fact: Idea was to write funny online game, so I think did it :)
 
-> Now implemented: working server handled all players and current logic
-> Basic client version 
+> Fan fact-2: It is my first javascript project and first experience with webDev
 
-> Future things:
-- Better logic:
--- eating others
--- updating player skills: hp, hp regen, speed, shooting speed, damage
--- food spawn 
--- nicknames show
--- game design 
--- starting page
+> Fact : The game will continue to develop 
 
 ---
-### Game Preview
-![](images/game_show.png)
-
+### Game preview
+![](images/game-img-7.png)
 ___
 
 ## How to run:
@@ -54,4 +47,10 @@ ___
 * HTML + CSS
 
 ___
-  
+
+### More gameplay:
+![](images/game-img-4.png)
+
+![](images/game-img-2.png)
+
+![](images/game-img-5.png)

@@ -8,18 +8,19 @@ class Room {
         this.sockets = {};
         this.players = {};
         this.bullets = [];
-        this.max_food_amount = 100;
+        this.max_food_amount = Constants.MAP_SIZE / 3;
         this.foods = [];
         setInterval(this.update.bind(this), 1000/60);
-        setInterval(this.updateFood.bind(this), 1000);
+        setInterval(this.updateFood.bind(this), 1000/5);
 
 
+        this.players_max_lvl = 20;
     }
 
 
     setup(){
         // adding start food
-        const start_food_amount = 20;
+        const start_food_amount = 200;
         for(let i = 0; i < start_food_amount; ++i) {
             this.foods.push(this.generateOneFood());
         }
@@ -27,7 +28,7 @@ class Room {
 
     updateFood() {
         if (this.foods.length < this.max_food_amount) {
-            var generate = Math.random();
+            const generate = Math.random();
             if (generate > 0.5){
                 this.foods.push(this.generateOneFood());
             }
@@ -43,25 +44,43 @@ class Room {
     }
 
 
-    addPlayer(socket, username='krem'){
+    addPlayer(socket, username){
         this.sockets[socket.id] = socket;
         const x = Math.floor((Math.random() * 2 - 1) * Constants.MAP_SIZE);
         const y = Math.floor((Math.random() * 2 - 1) * Constants.MAP_SIZE);
-        const r = Math.floor(Math.random() * Constants.PLAYER_RADIUS + 20);
+        const r = Math.floor(Math.random() * Constants.PLAYER_RADIUS + 10);
         this.players[socket.id] = new Player(socket.id, username, x, y, r);
         console.log('Created player on | X: ' + x + "Y: " + y);
         // console.log('after creation new player:');
         // console.log(this.players[socket.id]);
     }
 
+    updatePlayerCanvas(playerId, canvas_size){
+        this.players[playerId].canvas_size = canvas_size;
+    }
 
 
 
     addBullet(bulletID, bullet_dir){
-        const bullet_x = this.players[bulletID].pos.x;
-        const bullet_y = this.players[bulletID].pos.y;
-        this.bullets.push(new Bullet(bulletID, bullet_x, bullet_y, bullet_dir));
-        // console.log('number of bullets: ' + this.bullets.length)
+        const player = this.players[bulletID];
+        if (!player){
+            return;
+        }
+        if (!player.checkShootIsPossible()){
+
+            return;
+        }
+
+        if(player.canShoot()) {
+
+            const bullet_x = this.players[bulletID].pos.x;
+            const bullet_y = this.players[bulletID].pos.y;
+            this.bullets.push(new Bullet(bulletID, bullet_x, bullet_y, bullet_dir, player.bullet_speed,
+                player.damage, player.bullet_radius,  player.r, player.shoot_range));
+            // console.log('number of bullets: ' + this.bullets.length)
+            // console.log('made bullet by: ', player, ' bullet: ', this.bullets[this.bullets.length-1]);
+            player.makeShoot(this.bullets[this.bullets.length - 1]);
+        }
     }
 
 
@@ -123,6 +142,14 @@ class Room {
                 bulletsToRemove.push(bullet);
             }
         });
+
+        // check can it move further - bullet range
+        this.bullets.forEach(bullet => {
+            if (!bullet.canMoveFurther()){
+                bulletsToRemove.push(bullet);
+            }
+        })
+
         this.bullets = this.bullets.filter(bullet => !bulletsToRemove.includes(bullet));
 
         // update every player position
@@ -150,6 +177,33 @@ class Room {
 
 
 
+        // check if can eat other players
+        const all_players = Object.values(this.players);
+        all_players.forEach(player => {
+            all_players.filter(other => other!== player).forEach(other => {
+                player.eatsPlayer(other);
+            })
+        })
+
+
+
+
+        // check if there is dead players
+        Object.keys(this.players).forEach(playerID => {
+            const socket = this.sockets[playerID];
+            const player = this.players[playerID];
+
+            if (player.dead) {
+                let aliveData = {
+                    score: player.score
+                }
+                socket.emit(Constants.MSG_TYPES.GAME_OVER, aliveData);
+                this.removePlayer(socket);
+            }
+        })
+
+
+
         // console.log('\t\t\t\t\t------------------uuuuuuupdate')
         // console.log(this.players)
 
@@ -164,8 +218,9 @@ class Room {
         // console.log('\t\t\t\t\t-----------------------------')
         // console.log(this.players)
         // console.log('making update game to client:')
-        const leaderboard = this.getLeaderboard();
+
         Object.keys(this.sockets).forEach(playerID => {
+            let leaderboard = this.getLeaderboard(this.players[playerID])
             const socket = this.sockets[playerID];
             // console.log('*******************************')
             const player = this.players[playerID];
@@ -177,36 +232,120 @@ class Room {
             // console.log('*******************************')
 
             socket.emit(Constants.MSG_TYPES.GAME_UPDATE, this.createUpdate(player, leaderboard));
+
         })
     }
 
-    getLeaderboard() {
-        return Object.values(this.players)
+    getLeaderboard(player) {
+        let players = Object.values(this.players)
+            .filter(p => p !== player)
             .sort((p1, p2) => p2.score - p1.score)
-            .slice(0, 5)
-            .map(p => ({username: p.username, score:Math.round(p.score)}))
+            .slice(0, 4);
+        players.push(player);
+        players.sort((p1, p2) => p2.score - p1.score);
+        const player_pos = players.indexOf(player);
+
+        return {
+            players: players.map(p => ({username: p.username, score:Math.round(p.score)})),
+            me_position: player_pos
+        }
     }
 
     createUpdate(player, leaderboard){
         // console.log('sending update');
-        var data = {
+        const data = {
             me: player.serializeForUpdate(),
             others: Object.values(this.players).map(p => p.serializeForUpdate()),
             bullets: this.bullets.map(b => b.serializeForUpdate())
         };
 
-        // console.log(this.foods.map(f => f.serializeForUpdate()));
-        // console.log(data);
-        // console.log('before update:');
-        // console.log(player)
+
+        let newZoom = 30 / player.r;
+        player.zoom = lerp(player.zoom, newZoom, 0.1);
+
+
+        // const visible_dist = Constants.MAP_SIZE * 4;
+        const visible_dist = player.canvas_size / 2 * Math.sqrt(2) / (player.zoom + 0.5);
+
+
+        const nearbyPlayers = Object.values(this.players)
+            .filter(p => p!==player && p.pos.dist(player.pos) <= visible_dist);
+
+        const nearbyBullets = this.bullets.filter(b => b.pos.dist(player.pos) <= visible_dist);
+        const nearbyFood = this.foods.filter(f => f.pos.dist(player.pos) <= visible_dist);
+        
         return {
             me: player.serializeForUpdate(),
-            others: Object.values(this.players).map(p => p.serializeForUpdate()),
-            bullets: this.bullets.map(b => b.serializeForUpdate()),
-            food: this.foods.map(f => f.serializeForUpdate()),
+            others: nearbyPlayers.map(p => p.serializeForUpdate()),
+            bullets: nearbyBullets.map(b => b.serializeForUpdate()),
+            food: nearbyFood.map(f => f.serializeForUpdate()),
             leaderboard: leaderboard
         }
     }
+
+    upgradePlayer(playerID, skill_data){
+
+
+        if (!this.players[playerID]){
+            return;
+        }
+
+        if (!(this.players[playerID].player_lvl < this.players_max_lvl)){
+            return;
+        }
+
+        let points_cost = 1;
+        if (skill_data === 'damage_add' || skill_data === 'damage_decrease'){
+            points_cost = 0;
+        }
+
+
+        // if (!this.players[playerID].try_to_update(points_cost)){
+        //     return false;
+        // }
+
+        if (skill_data === 'damage_add'){
+            this.players[playerID].addDamage();
+        }
+        else if(skill_data === 'damage_decrease'){
+            this.players[playerID].decDamage();
+        }
+        else if(skill_data === 'reload'){
+            this.players[playerID].addReload();
+        }
+        else if(skill_data === 'range'){
+            this.players[playerID].addRange();
+        }
+        else if(skill_data === 'health'){
+            this.players[playerID].addHealth();
+        }
+        else if(skill_data === 'speed'){
+            this.players[playerID].addSpeed();
+        }
+        else if(skill_data === 'regen'){
+            this.players[playerID].addRegen();
+        }
+
+        const player = this.players[playerID];
+
+        const update_lvl_data = {
+            damageUpLvl: player.damage_lvl,
+            damageDecLvl: player.damage_lvl,
+            speedLvl: player.speed_lvl,
+            reloadLvl: player.reload_lvl,
+            healthLvl: player.hp_lvl,
+            rangeLvl: player.range_lvl,
+            regenLvl: player.regen_lvl
+        }
+
+        this.sockets[playerID].emit(Constants.MSG_TYPES.UPDATE_LABELS, update_lvl_data);
+
+    }
+}
+
+
+function lerp(start, end, t){
+    return start * (1-t) + end * t;
 }
 
 

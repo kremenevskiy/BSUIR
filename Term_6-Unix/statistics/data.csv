@@ -1,5 +1,6 @@
 name,count,price
-iphone8,10,500
-iphone9,20,700
-iphoneX,30,900
-iphoneXs,40,1000
+iphone,10,500
+iphone,20,700
+TV,30,900
+Xbox,40,1000
+Mouse,40,100

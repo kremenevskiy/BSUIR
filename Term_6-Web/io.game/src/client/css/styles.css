@@ -38,7 +38,7 @@ button:focus {
 }
 
 #game-canvas {
-    background-color: black;
+    background-color: white;
     width: 100%;
     height: 100%;
 }
@@ -77,6 +77,12 @@ button:focus {
     padding: 3px;
     text-align: center;
 
+}
+
+
+.disabled {
+    opacity: 0.5;
+    pointer-events: none;
 }
 
 
@@ -131,4 +137,76 @@ button:focus {
     background-color: white;
     border-radius: 20px;
     text-align: center;
+}
+
+
+#no-connect-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+#no-connect-modal > div {
+    font-size:15px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    padding: 15px 20px;
+    background-color: white;
+    border-radius: 20px;
+    text-align: center;
+}
+
+
+#dead-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+#dead-menu > div {
+    font-size:15px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    padding: 15px 20px;
+    background-color: white;
+    border-radius: 20px;
+    text-align: center;
+}
+
+
+#upgrade-menu {
+    position: fixed;
+    top: 75%;
+    left: 5px;
+    /*transform: translateY(-50%) translateX(-50%);*/
+    padding: 0;
+    background-color: transparent;
+    color: black;
+    display: grid;
+    border-radius: 20px;
+    text-align: center;
+}
+#upgrade-menu p{
+    margin:0;
+    padding: 0;
+}
+
+
+#upgrade-menu button{
+    width: 60px;
+    align-items: flex-start;
+    padding: 5px 1px;
+    font-size: 10px;
+
+    border-width: 1px;
 }
