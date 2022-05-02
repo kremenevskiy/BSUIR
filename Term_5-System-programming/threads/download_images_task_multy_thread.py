@@ -35,7 +35,7 @@ def download_image(img_url):
 
     with open(os.path.join(os.getcwd(), 'img', img_name), 'wb') as img_file:
         img_file.write(img_bytes)
-        print(f'{img_name} was downloaded')
+        print(f'{img_name} was downloaded | Time from start: {time.time() - start}\n')
 
 
 start = time.time()

@@ -35,7 +35,7 @@ for img_url in img_urls:
 
     with open(os.path.join(os.getcwd(), 'img', img_name), 'wb') as img_file:
         img_file.write(img_bytes)
-        print(f'{img_name} was downloaded')
+        print(f'{img_name} was downloaded | Time from start: {time.time() - start}')
 
 finish = time.time()
 print(f'Time 1 Thread download: {finish - start}')

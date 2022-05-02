@@ -77,8 +77,8 @@ def consumer(q, condition):
 
 
 if __name__ == '__main__':
-    n_producer = 2
-    n_consumer = 2
+    n_producer = 3
+    n_consumer = 3
     prepare()
     queue = Queue()
     cond = Condition()
